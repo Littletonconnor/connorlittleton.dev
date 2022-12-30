@@ -1,0 +1,24 @@
+import Help from './file'
+import Layout from '../../components/layout/layout'
+
+export const meta = {
+  author: 'Connor Littleton',
+  date: '2022-07-14',
+  title: 'Clamp in JS',
+  description:
+    'How to write a clamping function in JS',
+
+}
+
+export default (props) => {
+  return <Layout.ArticleLayout meta={meta} {...props} />
+}
+
+```js
+function clamp(minValue, maxValue, preferredValue) {
+  const min = Math.min(minValue, maxValue)
+  const max = Math.max(minValue, maxValue)
+
+  return Math.min(Math.max(preferredValue, min), max)
+}
+```
