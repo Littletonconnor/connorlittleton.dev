@@ -73,7 +73,7 @@ Layout.ArticleLayout = function ArticleLayout({
         <meta name="description" content={meta.description} />
         <meta
           property="og:image"
-          content={`${ogUrl}/api/og?title=${meta.ogTitle}&author=${meta.ogAuthor}`}
+          content={`${ogUrl}/api/og?title=${meta.title}&author=${meta.author}`}
         />
       </Head>
       <Container className="mt-16 lg:mt-32">
