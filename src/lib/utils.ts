@@ -21,4 +21,16 @@ function removeProperty(property: any) {
   document.documentElement.style.removeProperty(property)
 }
 
-export { clamp, formatDate, setProperty, removeProperty }
+const environment = {
+  isDev() {
+    return process.env.NODE_ENV !== 'production'
+  },
+  isProd() {
+    return process.env.NODE_ENV === 'production'
+  },
+  isTest() {
+    return process.env.NODE_ENV === 'test'
+  },
+}
+
+export { clamp, formatDate, setProperty, removeProperty, environment }

@@ -15,7 +15,6 @@ import { InferGetStaticPropsType } from 'next'
 import Card from '../components/card/card'
 import { Button } from '../components/button/button'
 import { RESUME } from '../lib/constants'
-import { resolve } from 'path'
 
 function SocialLink({
   icon: Icon,

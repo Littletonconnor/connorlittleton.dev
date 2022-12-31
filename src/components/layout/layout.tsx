@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { Container } from '../container/container'
 import clsx from 'clsx'
 import * as icons from '../icons/icons'
-import { formatDate } from '../../lib/utils'
+import { environment, formatDate } from '../../lib/utils'
 
 function Layout() {
   return null
@@ -62,11 +62,19 @@ Layout.ArticleLayout = function ArticleLayout({
     return children
   }
 
+  const ogUrl = environment.isDev()
+    ? 'http://localhost:3000'
+    : 'https://connorlittleton.dev'
+
   return (
     <>
       <Head>
         <title>{`${meta.title} - Connor Littleton`}</title>
         <meta name="description" content={meta.description} />
+        <meta
+          property="og:image"
+          content={`${ogUrl}/api/og?title=${meta.ogTitle}&author=${meta.ogAuthor}`}
+        />
       </Head>
       <Container className="mt-16 lg:mt-32">
         <div className="xl:relative">

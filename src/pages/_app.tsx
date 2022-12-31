@@ -6,7 +6,6 @@ import Header from '../components/header/header'
 
 import '../styles/tailwind.css'
 import '../styles/prism.css'
-import clsx from 'clsx'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -22,8 +21,6 @@ function usePrevious(value: string) {
 
   return ref.current
 }
-
-console.log('inter', inter)
 
 export default function App({ Component, pageProps, router }: AppProps) {
   const previousPathname = usePrevious(router.pathname)
