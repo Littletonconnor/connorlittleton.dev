@@ -62,6 +62,8 @@ Layout.ArticleLayout = function ArticleLayout({
     return children
   }
 
+  console.log('previousPathname', previousPathname)
+
   return (
     <>
       <Head>

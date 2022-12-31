@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import type { AppProps } from 'next/app'
 import Footer from '../components/footer/footer'
 import Header from '../components/header/header'
@@ -5,7 +6,19 @@ import Header from '../components/header/header'
 import '../styles/tailwind.css'
 import '../styles/prism.css'
 
-export default function App({ Component, pageProps }: AppProps) {
+function usePrevious(value: string) {
+  const ref = useRef<string>('')
+
+  useEffect(() => {
+    ref.current = value
+  }, [value])
+
+  return ref.current
+}
+
+export default function App({ Component, pageProps, router }: AppProps) {
+  const previousPathname = usePrevious(router.pathname)
+
   return (
     <>
       <div className="fixed inset-0 flex justify-center sm:px-8">
@@ -16,7 +29,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <div className="relative">
         <Header />
         <main>
-          <Component {...pageProps} />
+          <Component previousPathname={previousPathname} {...pageProps} />
         </main>
         <Footer />
       </div>
