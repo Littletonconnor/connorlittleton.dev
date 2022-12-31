@@ -1,0 +1,156 @@
+import Layout from '../../components/layout/layout'
+import Final, {ExampleOne, ExampleTwo, ExampleThree} from '../../components/articles/conic_gradient_animations'
+
+export const meta = {
+author: 'Connor Littleton',
+date: '2022-12-29',
+title: 'Conic Gradients Animations',
+description:
+  'In this post, I walk you through how to build a cool conic gradient animation',
+
+}
+
+export default (props) => {
+  return <Layout.ArticleLayout meta={meta} {...props} />
+}
+
+<Final />
+
+Today we are going to learn how to build this awesome conic gradient animation.
+
+The first thing we need to do is setup the HTML we'll need for this animation. Surprisingly, we only need one DOM node. [Psuedo-elements](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements) will take care of the rest for us.
+
+```html
+<div class="animation"></div>
+```
+
+Now that we have our DOM node, let's build the rectangle and give it a border radius.
+
+```css
+:root {
+  --border-radius: 12px;
+  --size: 80px;
+}
+
+.animation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--size);
+  transform: translateZ(0);
+  height: var(--size);
+  /* Giving it a border for right now so we can see it. */
+  border: 1px solid red;
+}
+```
+
+- This example uses [CSS custom properties](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties). If you'd like to learn more about them check out my [blog post](/articles/css-custom-properties).
+
+<ExampleOne />
+
+Okay, so now that we have our square we can start thinking about how to create this animation.
+
+This animation is split into two parts, an inner-square which contains some background color of your choosing, and then an outer square that uses CSS animations to rotate around the square we've created.
+
+Let's start by creating the inner-square which contains the gray linear gradient.
+
+```css
+:root {
+  --gradient-from: #f9fafb;
+  --gradient-to: #e5e7eb;
+}
+
+.animation::before,
+.animation::after {
+  position: absolute;
+  content: '';
+  z-index: -1;
+}
+
+/* Inner Square */
+.animation::after {
+  inset: 0;
+  padding: 1px;
+  border-radius: var(--border-radius);
+  background: linear-gradient(
+    to bottom right,
+    var(--gradient-from),
+    var(--gradient-to)
+  );
+  background-clip: content-box;
+}
+```
+
+- We made our psuedo-elements absolutely positioned, which means `inset-0` will take up the full height and width of the element.
+- The padding 1px here is very important, this is what gives us the border look since it creates a gap between this and the animation we will create next.
+- background-clip lets you control how far a background image or color extends beyond an elements padding or content.
+
+<ExampleTwo />
+
+Okay, so now that we've got the inner square hooked up, lets start working on adding the conic gradient and animation.
+
+Let's use this pre-made conic gradient:
+
+```css
+:root {
+  --tile-border: conic-gradient(
+    #00000080,
+    #00000040,
+    #00000030,
+    #00000020,
+    #00000010,
+    #00000010,
+    #00000080
+  );
+}
+```
+
+- We're not going to discuss what conic-gradients are, but if you'd like to learn more, I have a [blog post](/articles/linear-gradients) all about them!
+
+Let's now apply the conic-gradient to the outer square we're going to create.
+
+```css
+.animation::before {
+  width: 200%;
+  height: 200%;
+  animation: 6s rotate linear infinite;
+  background: var(--tile-border);
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+```
+
+<ExampleThree />
+
+Wow! So we can see we're super close! We've intentionally left out the overflow-hidden property because we wanted to be able to see the conic-gradient animation in full effect.
+
+Lets now apply the overflow hidden property to our element.
+
+```css
+.animation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--size);
+  overflow: hidden;
+  transform: translateZ(0);
+  height: var(--size);
+  border-radius: var(--border-radius);
+}
+```
+
+<Final />
+
+Boom! we now have our fancy conic-gradient animation.
+
+### Resources
+
+- [check out the codepen for this example](https://codepen.io/ConnorLittleton/pen/rNrePoE)
+- [check out this other very smart technique for rotating borders](https://codepen.io/Chokcoco/pen/YzGdEMZ)
