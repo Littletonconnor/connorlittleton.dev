@@ -71,6 +71,9 @@ Layout.ArticleLayout = function ArticleLayout({
       <Head>
         <title>{`${meta.title} - Connor Littleton`}</title>
         <meta name="description" content={meta.description} />
+        {/* OG Image */}
+        <meta name="og:title" content={meta.title}></meta>
+        <meta name="og:description" content={meta.description}></meta>
         <meta
           property="og:image"
           content={`${ogUrl}/api/og?title=${meta.title}&author=${meta.author}`}
