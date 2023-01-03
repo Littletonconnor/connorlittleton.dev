@@ -13,6 +13,7 @@ import { getAllArticles } from '../lib/getArticles'
 import { formatDate } from '../lib/utils'
 import { InferGetStaticPropsType } from 'next'
 import Card from '../components/card/card'
+import Visualizer from '../components/visualizer/visualizer'
 import { Button } from '../components/button/button'
 import { RESUME } from '../lib/constants'
 
@@ -180,6 +181,7 @@ function Home({ articles }: Props) {
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
             Passionate Software Engineer and avid reader of all things.
           </h1>
+          <Visualizer>Content</Visualizer>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
             Hi, my name is Connor and I am a software engineer based in Rohnert
             Park, California. I am currently employed at Wealthfront as a

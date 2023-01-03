@@ -1,10 +1,14 @@
+import Layout from '../../components/layout/layout'
+
 export const meta = {
   author: 'Connor Littleton',
-  date: '2022-11-20',
-  title: 'This is a fancy title for my second blog post',
+  date: '2023-01-02',
+  title: 'Re-building Vercels landing page',
   description:
-    'This is my second blog post',
-
+    'In this post, I walk you through how I re-built Vercels awesome landing page',
 }
 
-This is some mdx
+export default (props) => {
+  return <Layout.ArticleLayout meta={meta} {...props} />
+
+}

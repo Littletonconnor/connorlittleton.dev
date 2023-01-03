@@ -1,5 +1,30 @@
 .center {
+  height: 215px;
   display: flex;
+  align-items: center;
+  justify-content: center;
+
+  --size: 80px;
+  --gradient-from: #f9fafb;
+  --gradient-to: #e5e7eb;
+  --border-radius: 12px;
+  --tile-start-rgb: 239, 245, 249;
+  --tile-end-rgb: 228, 232, 233;
+  --tile-border: conic-gradient(
+    #00000080,
+    #00000040,
+    #00000030,
+    #00000020,
+    #00000010,
+    #00000010,
+    #00000080
+  );
+}
+
+.content {
+  height: 215px;
+  display: flex;
+  align-items: center;
   justify-content: center;
 
   --size: 80px;

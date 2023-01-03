@@ -1,3 +1,4 @@
+import Visualizer from '../visualizer/visualizer'
 import styles from './styles.module.css'
 
 function ExampleOne() {
@@ -26,9 +27,12 @@ function ExampleThree() {
 
 function Final() {
   return (
-    <div className={styles.center}>
-      <div className={styles.final__animation}></div>
-    </div>
+    <Visualizer>
+      <Visualizer.Content className={styles.content}>
+        <div className={styles.final__animation}></div>
+      </Visualizer.Content>
+      <Visualizer.Controls />
+    </Visualizer>
   )
 }
 
