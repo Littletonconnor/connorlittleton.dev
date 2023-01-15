@@ -1,0 +1,20 @@
+import Layout from '../../components/layout/layout'
+import Final, {
+  ExampleOne,
+} from '../../components/articles/vercel-landing-page'
+
+export const meta = {
+  author: 'Connor Littleton',
+  date: '2023-01-13',
+  title: 'Re-building Vercels landing page',
+  description:
+    'In this post, I walk you through how to build vercels landing page',
+}
+
+export default (props) => {
+  return <Layout.ArticleLayout meta={meta} {...props} />
+}
+
+<Final />
+
+Today we are going to take a look at a portion of Vercels landing page and see how they managed to create it.

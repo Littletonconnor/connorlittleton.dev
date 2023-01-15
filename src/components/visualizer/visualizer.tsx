@@ -20,10 +20,21 @@ function Visualizer({
   )
 }
 
-Visualizer.Controls = function Controls() {
+Visualizer.Controls = function Controls({
+  className,
+  children,
+}: {
+  className?: string
+  children?: React.ReactNode
+}) {
   return (
-    <div className="justify-space-between flex border-t border-black/10 bg-zinc-50 p-2">
-      toggle
+    <div
+      className={clsx(
+        className,
+        'justify-space-between flex border-t border-black/10 bg-zinc-50 p-2'
+      )}
+    >
+      {children}
     </div>
   )
 }

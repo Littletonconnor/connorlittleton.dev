@@ -6,6 +6,7 @@ import Header from '../components/header/header'
 
 import '../styles/tailwind.css'
 import '../styles/prism.css'
+import '../styles/globals.css'
 
 const inter = Inter({
   subsets: ['latin'],
