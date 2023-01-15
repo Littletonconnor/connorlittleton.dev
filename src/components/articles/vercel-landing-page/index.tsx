@@ -21,7 +21,7 @@ const shipStyles = {
 
 function Final() {
   return (
-    <Visualizer className="px-4 py-6">
+    <Visualizer>
       <Visualizer.Content>
         <div className={styles.container}>
           <div className={styles.hero_texts}>
