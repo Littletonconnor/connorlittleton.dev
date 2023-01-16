@@ -19,6 +19,152 @@ const shipStyles = {
   '--end-color': '#F9CB28',
 } as any
 
+function ExampleOne() {
+  return (
+    <Visualizer>
+      <Visualizer.Content>
+        <div className={styles.container}>
+          <div className={styles.hero_texts}>
+            {/* Margin bottom override to fix alignment */}
+            <h1 style={{ marginBottom: 0 }} className={styles.hero_title}>
+              <span
+                style={developStyles}
+                className={styles.animated_gradient_background}
+              >
+                <span
+                  className={`${styles.animated_gradient_foreground} ${styles.animated_gradient_foreground1}`}
+                >
+                  Develop.
+                </span>
+              </span>
+              <span
+                style={previewStyles}
+                className={styles.animated_gradient_background}
+              >
+                <span
+                  className={`${styles.animated_gradient_foreground} ${styles.animated_gradient_foreground2}`}
+                >
+                  Preview.
+                </span>
+              </span>
+              <span
+                style={shipStyles}
+                className={styles.animated_gradient_background}
+              >
+                <span
+                  className={`${styles.animated_gradient_foreground} ${styles.animated_gradient_foreground3}`}
+                >
+                  Ship.
+                </span>
+              </span>
+            </h1>
+          </div>
+        </div>
+      </Visualizer.Content>
+    </Visualizer>
+  )
+}
+
+function ExampleTwo() {
+  return (
+    <Visualizer>
+      <Visualizer.Content>
+        <div className={styles.container}>
+          <div className={styles.hero_texts}>
+            {/* Margin bottom override to fix alignment */}
+            <h1 style={{ marginBottom: 0 }} className={styles.hero_title}>
+              <span
+                style={{ ...developStyles, backgroundClip: 'unset' }}
+                className={styles.animated_gradient_background}
+              >
+                <span
+                  style={{ backgroundClip: 'unset' }}
+                  className={`${styles.animated_gradient_foreground} ${styles.animated_gradient_foreground1}`}
+                >
+                  Develop.
+                </span>
+              </span>
+              <span
+                style={{ ...previewStyles, backgroundClip: 'unset' }}
+                className={styles.animated_gradient_background}
+              >
+                <span
+                  style={{ backgroundClip: 'unset' }}
+                  className={`${styles.animated_gradient_foreground} ${styles.animated_gradient_foreground2}`}
+                >
+                  Preview.
+                </span>
+              </span>
+              <span
+                style={{ ...shipStyles, backgroundClip: 'unset' }}
+                className={styles.animated_gradient_background}
+              >
+                <span
+                  style={{ backgroundClip: 'unset' }}
+                  className={`${styles.animated_gradient_foreground} ${styles.animated_gradient_foreground3}`}
+                >
+                  Ship.
+                </span>
+              </span>
+            </h1>
+          </div>
+        </div>
+      </Visualizer.Content>
+    </Visualizer>
+  )
+}
+
+function ExampleThree() {
+  return (
+    <Visualizer>
+      <Visualizer.Content>
+        <div className={styles.container}>
+          <div className={styles.hero_texts}>
+            <h1 className={styles.hero_title}>
+              <span
+                style={developStyles}
+                className={styles.animated_gradient_background}
+              >
+                <span
+                  className={`${styles.animated_gradient_foreground} ${styles.animated_gradient_foreground1}`}
+                >
+                  Develop.
+                </span>
+              </span>
+              <span
+                style={previewStyles}
+                className={styles.animated_gradient_background}
+              >
+                <span
+                  className={`${styles.animated_gradient_foreground} ${styles.animated_gradient_foreground2}`}
+                >
+                  Preview.
+                </span>
+              </span>
+              <span
+                style={shipStyles}
+                className={styles.animated_gradient_background}
+              >
+                <span
+                  className={`${styles.animated_gradient_foreground} ${styles.animated_gradient_foreground3}`}
+                >
+                  Ship.
+                </span>
+              </span>
+            </h1>
+            {/*  */}
+            <h2 className={styles.hero_description}>
+              Vercel is the platform for frontend developers, providing the
+              speed and reliability innovators need to create at the moment of
+              inspiration.
+            </h2>
+          </div>
+        </div>
+      </Visualizer.Content>
+    </Visualizer>
+  )
+}
+
 function Final() {
   return (
     <Visualizer>
@@ -112,4 +258,5 @@ function Final() {
   )
 }
 
+export { ExampleOne, ExampleTwo, ExampleThree }
 export default Final

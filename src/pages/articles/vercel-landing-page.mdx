@@ -1,6 +1,8 @@
 import Layout from '../../components/layout/layout'
 import Final, {
   ExampleOne,
+  ExampleTwo,
+  ExampleThree,
 } from '../../components/articles/vercel-landing-page'
 
 export const meta = {
@@ -17,4 +19,353 @@ export default (props) => {
 
 <Final />
 
-Today we are going to take a look at a portion of Vercels landing page and see how they managed to create it.
+In today's examination, we will analyze a section of Vercel's landing page to gain insight into
+their design and development processes. To facilitate this analysis, we will break the section down
+into three distinct components: the animated title, the accompanying description,
+and the functional buttons with their corresponding animated effects.
+To achieve the visually appealing gradient animation, it will be necessary to nest elements within the h1 tag.
+The following markdown serves as an example:
+
+```jsx
+<div className={styles.container}>
+  <div className={styles.hero_texts}>
+    <h1 className={styles.hero_title}>
+      <span
+        style={developStyles}
+        className={styles.animated_gradient_background}
+      >
+        <span
+          className={`${styles.animated_gradient_foreground} ${styles.animated_gradient_foreground1}`}
+        >
+          Develop.
+        </span>
+      </span>
+      <span
+        style={previewStyles}
+        className={styles.animated_gradient_background}
+      >
+        <span
+          className={`${styles.animated_gradient_foreground} ${styles.animated_gradient_foreground2}`}
+        >
+          Preview.
+        </span>
+      </span>
+      <span style={shipStyles} className={styles.animated_gradient_background}>
+        <span
+          className={`${styles.animated_gradient_foreground} ${styles.animated_gradient_foreground3}`}
+        >
+          Ship.
+        </span>
+      </span>
+    </h1>
+  </div>
+</div>
+```
+
+The animated title is realized through the utilization of nested span elements within the h1 tag.
+Each span is specifically designated to animate a specific segment of the title.
+In this case, one span animates the text "Develop," while another animates the text "Preview," and so forth.
+As demonstrated in the provided example, there are two spans utilized.
+This is necessary to achieve the effect of oscillation between a black background and a gradient background.
+The outer span serves to provide the black background during inactivity of the gradient animation, while
+the inner span is responsible for the gradient animation and its corresponding effects.
+We will now proceed to examine the CSS code:
+
+```css
+.hero_texts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero_title {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.animated_gradient_background {
+  position: relative;
+  display: block;
+}
+
+.animated_gradient_background::before {
+  content: var(--content);
+  position: absolute;
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-bottom: -10px;
+  background: black;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  padding-left: 0.05em;
+  padding-right: 0.05em;
+}
+
+.animated_gradient_foreground {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-left: 0.05em;
+  padding-right: 0.05em;
+  background-image: linear-gradient(
+    90deg,
+    var(--start-color),
+    var(--end-color)
+  );
+  position: relative;
+  z-index: 1;
+}
+
+.animated_gradient_foreground1 {
+  animation: animated_gradient_text_fade_foreground1 8s ease-in-out infinite;
+}
+
+.animated_gradient_foreground2 {
+  animation: animated_gradient_text_fade_foreground2 8s ease-in-out infinite;
+}
+
+.animated_gradient_foreground3 {
+  animation: animated_gradient_text_fade_foreground3 8s ease-in-out infinite;
+}
+
+@keyframes animated_gradient_text_fade_foreground1 {
+  0%,
+  16%,
+  100% {
+    opacity: 1;
+  }
+  33%,
+  83% {
+    opacity: 0;
+  }
+}
+
+@keyframes animated_gradient_text_fade_foreground2 {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  33.333%,
+  50% {
+    opacity: 1;
+  }
+  16%,
+  66% {
+    opacity: 0;
+  }
+}
+
+@keyframes animated_gradient_text_fade_foreground3 {
+  0%,
+  50%,
+  100% {
+    opacity: 0;
+  }
+  66.6677%,
+  83% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 960px) {
+  .hero_title {
+    font-size: 1.5rem;
+    flex-direction: column;
+    display: flex;
+  }
+}
+```
+
+In this example, we have deliberately excluded certain typography styles for brevity.
+However, several noteworthy properties are still utilized.
+Firstly, pseudo-elements are employed on both the background span and the inner span to provide the
+background color. Secondly, the key property in this animation is the background-clip property.
+This property is essential in achieving the animation effect.
+Additionally, a simple opacity animation is applied to the gradient to create the in and out
+animation effect. The specific numeric values in the keyframes are not crucial, and it is
+advisable to experiment with different values to achieve a desired aesthetic.
+
+The background-clip property, as defined by MDN, determines whether an element's background extends
+underneath its border box, padding box, or content box.
+In this case, by using background-clip: text, the background of the element is clipped to its
+foreground (the text). The significance of this property is that it enables the creation of  
+two backgrounds, a black one and an inner linear-gradient one.
+
+To illustrate the importance of the background-clip property, let's consider the animation without it.
+
+<ExampleTwo />
+
+This example serves to provide a clear understanding of the animation technique employed.
+In essence, we are creating two distinct backgrounds and then utilizing the background-clip
+property to confine them to the content. By reinstating the background-clip properties, we will be able
+to achieve the desired animated title effect.
+
+<ExampleOne />
+
+We are now proceeding to step 2 of 3 in our examination. This step involves the implementation of
+descriptive text, which should be relatively straightforward.
+Therefore, we will simply present the relevant code and proceed to the next step.
+
+```jsx
+<div className={styles.container}>
+  <div className={styles.hero_texts}>
+    {/* Title jsx goes here */}
+    <h2 className={styles.hero_description}>
+      Vercel is the platform for frontend developers, providing the speed and
+      reliability innovators need to create at the moment of inspiration.
+    </h2>
+  </div>
+</div>
+```
+
+```css
+.hero_description {
+  line-height: 1.6em;
+  letter-spacing: -0.02em;
+  margin: 0 auto 24px;
+  font-weight: 400;
+  font-size: 1rem;
+  max-width: 780px;
+  color: rgb(102, 102, 102);
+}
+```
+
+<ExampleThree />
+
+Phew, we're now on the last step! For this step we'll just primarily be discussing the right button since
+thats where all the fun animations happen.
+
+Here's what the markup looks like:
+
+```jsx
+<div className={styles.container}>
+  {/* Title and subtitle go here */}
+  <div className={styles.hero_buttons}>
+    <div className={styles.hero_button_item}>
+      <a className={`${styles.button} ${styles.button_primary}`} role="button">
+        <span className={styles.button_content}>
+          <svg
+            aria-label="Vercel Logo"
+            fill="currentColor"
+            viewBox="0 0 75 65"
+            height="15.600000000000001"
+            width="18"
+          >
+            <path d="M37.59.25l36.95 64H.64l36.95-64z"></path>
+          </svg>
+          <span>Start deploying</span>
+        </span>
+      </a>
+    </div>
+    <div className={styles.hero_button_item}>
+      <div className={styles.hero_gradient_button_wrapper}>
+        <span
+          style={developStyles}
+          className={`${styles.hero_button_bg} ${styles.animated_gradient_foreground1}`}
+        />
+        <span
+          style={previewStyles}
+          className={`${styles.hero_button_bg} ${styles.animated_gradient_foreground2}`}
+        />
+        <span
+          style={shipStyles}
+          className={`${styles.hero_button_bg} ${styles.animated_gradient_foreground3}`}
+        />
+        <a
+          className={`${styles.button} ${styles.button_secondary}`}
+          role="button"
+        >
+          <span className={styles.button_content}>Get a Demo</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+As we can observe, the button gradient effect is achieved through the placement of three adjacent span
+elements in relation to the button. Each of these span elements is specifically designated to
+create a segment of the linear gradient that we see. We will now proceed to examine the CSS code
+pertaining to this effect.
+
+```css
+.button_secondary {
+  border: 1px solid transparent;
+  background-color: white;
+  background-clip: padding-box;
+  color: #000;
+  box-shadow: 0 4px 4px 0 #00000010;
+  transition-property: background-color, color, box-shadow;
+}
+
+.button_secondary:hover {
+  background-color: transparent;
+  color: white;
+}
+
+.hero_gradient_button_wrapper {
+  position: relative;
+}
+
+.hero_button_bg {
+  height: 100%;
+  width: 100%;
+  left: 0;
+  border-radius: 5px;
+  z-index: -1;
+  position: absolute;
+  background-image: linear-gradient(
+    165deg,
+    var(--start-color),
+    var(--end-color)
+  );
+}
+
+.hero_button_bg::before {
+  content: '';
+  filter: blur(36px);
+  height: 100%;
+  opacity: 0.8;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+  left: 0;
+  background: linear-gradient(165deg, var(--start-color), var(--end-color));
+}
+```
+
+There are several elements at play in this implementation.
+Firstly, the background-clip property is employed once again.
+This time, instead of using text, we are utilizing padding-box.
+As defined by MDN, this property forces the background to extend beyond the padding,
+but no background is drawn beneath the border.
+This allows us to create a button with a white background and a transparent border.
+Next, the adjacent span elements are instructed to expand to fit their parent container,
+which enables the creation of the linear gradient. Finally, a pseudo-element is utilized to create a
+blurred background effect. By applying a substantial amount of blur, the pseudo-element is
+forced to remain in the same position as the gradient, but expands slightly to become visible.
+
+In conclusion, the animation effect on Vercel's landing page was analyzed and broken down into
+three key components: the animated title, the accompanying description, and the functional buttons with their
+corresponding animated effects. The background-clip property was identified as a crucial element in achieving
+the animation effect, enabling the creation of multiple backgrounds and confining them to the content.
+Additionally, the use of nested span elements and opacity animation was demonstrated to enhance the visual appeal
+of the title. The implementation of the button gradient effect was also explained, making use of
+the background-clip property and pseudo-elements to achieve the desired result. Overall, this examination has
+provided insight into the design and development processes employed in creating this visually compelling section of Vercel's
+landing page.
+
+### Resources
+
+- [check out the codepen for this example](https://codepen.io/ConnorLittleton/pen/QWBEKOE)
+- [Vercel](https://vercel.com/)
