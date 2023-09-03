@@ -1,1 +1,3 @@
-# connorlittleton.dev
+# Connorlittleton.dev
+
+My personal website.
