@@ -1,0 +1,100 @@
+---
+
+---
+
+<header>
+  <div>
+    <a class="logo" href="/">Connor Littleton</a>
+    <nav>
+      <ul>
+        <li>
+          <a href="/blog">
+            <svg fill="none" viewBox="0 0 24 24" astro-icon="notebook"
+              ><path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M16.25 18.25h-8.5a2 2 0 0 1-2-2v-9.5a2 2 0 0 1 2-2h8.5a2 2 0 0 1 2 2v9.5a2 2 0 0 1-2 2ZM14.25 8.75h-.5M14.25 11.75h-.5M9.75 4.75v14.5"
+              ></path></svg
+            >
+             Blog</a
+          >
+          <li>
+            <a href="/recipes">
+              <svg fill="none" viewBox="0 0 24 24" astro-icon="notebook"
+                ><path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M16.25 18.25h-8.5a2 2 0 0 1-2-2v-9.5a2 2 0 0 1 2-2h8.5a2 2 0 0 1 2 2v9.5a2 2 0 0 1-2 2ZM14.25 8.75h-.5M14.25 11.75h-.5M9.75 4.75v14.5"
+                ></path></svg
+              >
+               Recipes</a
+            >
+          </li>
+          <li>
+            <a href="/projects">
+              <svg fill="none" viewBox="0 0 24 24" astro-icon="multiple-folders"
+                ><path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M4.75 10.75v6.5a2 2 0 0 0 2 2h7.5a2 2 0 0 0 2-2v-4.5a2 2 0 0 0-2-2h-9.5Zm0 0v-1a2 2 0 0 1 2-2h3.063a2 2 0 0 1 1.755 1.042l1.073 1.958m-4.891-3v-1a2 2 0 0 1 2-2h3.063a2 2 0 0 1 1.755 1.042l1.073 1.958h1.609a2 2 0 0 1 2 2v4.5a2 2 0 0 1-2 2h-1"
+                ></path></svg
+              >
+               Projects</a
+            >
+          </li>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  header {
+    margin: auto;
+    padding-block: 12px;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  /* First div inside header */
+  header > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    max-width: var(--max-width);
+    margin: auto;
+  }
+
+  ul {
+    display: flex;
+    gap: 20px;
+  }
+
+  a > svg {
+    width: 1.25em;
+    height: 1.25em;
+  }
+
+  a {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--text-color);
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
