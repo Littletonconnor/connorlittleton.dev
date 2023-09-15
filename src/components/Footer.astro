@@ -1,59 +1,25 @@
 ---
 
+let today = new Date().getFullYear();
 ---
 
-<footer>
-  <div>
-    <ul>
+<footer class="border-t border-slate-200 w-full">
+  <div class="max-w-[calc(64rem-32px)] flex justify-between items-center px-3 py-4 mx-auto">
+    <span class="flex items-center space-x-1 text-sm px-3"
+      ><span>©</span>
+      <span>{today}</span>
+      <span>Connor Littleton</span></span
+    >
+    <ul class="flex gap-4">
       <li>
-        <a href="">Github</a>
+        <a class="text-slate-600 no-underline" href="https://github.com/Littletonconnor">Github</a>
       </li>
       <li>
-        <a href="">LinkedIn</a>
+        <a  class="text-slate-600 no-underline" href="https://www.linkedin.com/in/connor-littleton-31bb43135/">LinkedIn</a>
       </li>
       <li>
-        <a href="">Email</a>
-      </li>
-    </ul>
-    <ul>
-      <li>
-        <a href="">Github</a>
-      </li>
-      <li>
-        <a href="">LinkedIn</a>
-      </li>
-      <li>
-        <a href="">Email</a>
+        <a  class="text-slate-600 no-underline" href="mailto:'littletonconnor@gmail.com'">Email</a>
       </li>
     </ul>
   </div>
 </footer>
-
-<style>
-  footer {
-    max-width: var(--max-width);
-    margin: auto;
-  }
-
-  footer > div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 0;
-    border-top: 1px solid #e4e4e7;
-  }
-
-  ul {
-    display: flex;
-    gap: 1rem;
-  }
-
-  a {
-    color: var(--text-color);
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-</style>

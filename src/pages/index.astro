@@ -6,7 +6,7 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Connor Littleton">
-  <main class="container mx-auto max-w-5xl py-14">
+  <main class="container mx-auto max-w-[calc(64rem-32px)] px-4 py-14">
     <div class="grid w-full gap-12 md:grid-cols-2">
       <div class="h-auto overflow-hidden">
         <Image
@@ -20,7 +20,7 @@ import Layout from "../layouts/Layout.astro";
         <p>
           I'm <strong>Connor</strong> a Software engineer currently working on
           the design system team
-          <a class="font-medium underline" href="https//www.wealthfront.com"
+          <a class="font-medium underline" href="https://www.wealthfront.com"
             >Wealthfront</a
           >.
         </p>
@@ -31,25 +31,119 @@ import Layout from "../layouts/Layout.astro";
         </p>
         <section class="pt-6">
           <h2
-            class="text-sm font-normal uppercase tracking-wider text-neutral-600"
+            class="text-sm font-medium uppercase tracking-wider text-neutral-600"
           >
             Featured Posts
           </h2>
           <ol class="mt-3 space-y-4">
             <li>
-              <article>Post 1</article>
+              <article class="group">
+                <h2 class="text-lg font-semibold hover:underline">
+                  <a href="/blog/monorepo">Monorepos</a>
+                </h2>
+                  <div class="flex flex-col gap-1.5">
+                    <p class="text-slate-600 text-sm">
+                      All about the benefits monorepo's can bring to your
+                      company.
+                    </p>
+                    <dl class="text-xs text-slate-600 flex gap-1 items-center">
+                      <dt>
+                        <svg
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          class="h-[1.25em] w-[1.25em]"
+                          astro-icon="clock"
+                          ><circle
+                            cx="12"
+                            cy="12"
+                            r="7.25"
+                            stroke="currentColor"
+                            stroke-width="1.5"></circle><path
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            d="M12 8v4l2 2"></path></svg
+                        >
+                      </dt>
+                      <dd>
+                        <time datetime="2023-09-14"> 14 Sep 2021</time>
+                      </dd>
+                    </dl>
+                  </div>
+              </article>
             </li>
             <li>
-              <article>Post 2</article>
+              <article>
+                <h2 class="text-lg font-semibold hover:underline">
+                  <a href="/blog/monorepo">Jest Memory Issues</a>
+                </h2>
+                  <div class="flex flex-col gap-1.5">
+                    <p class="text-slate-600 text-sm">
+                      Some useful tips and tricks to debugging memory issues in Jest.
+                    </p>
+                    <dl class="text-xs text-slate-600 flex gap-1 items-center">
+                      <dt>
+                        <svg
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          class="h-[1.25em] w-[1.25em]"
+                          astro-icon="clock"
+                          ><circle
+                            cx="12"
+                            cy="12"
+                            r="7.25"
+                            stroke="currentColor"
+                            stroke-width="1.5"></circle><path
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            d="M12 8v4l2 2"></path></svg
+                        >
+                      </dt>
+                      <dd>
+                        <time datetime="2023-09-14"> 14 Sep 2021</time>
+                      </dd>
+                    </dl>
+                  </div>
+              </article>
             </li>
             <li>
-              <article>Post 3</article>
+              <article>
+                <h2 class="text-lg font-semibold hover:underline">
+                  <a href="/blog/cdn">Content Deliver Networks</a>
+                </h2>
+                  <div class="flex flex-col gap-1.5">
+                    <p class="text-slate-600 text-sm">
+                      The importance of CDNs and how they can help your site.
+                    </p>
+                    <dl class="text-xs text-slate-600 flex gap-1 items-center">
+                      <dt>
+                        <svg
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          class="h-[1.25em] w-[1.25em]"
+                          astro-icon="clock"
+                          ><circle
+                            cx="12"
+                            cy="12"
+                            r="7.25"
+                            stroke="currentColor"
+                            stroke-width="1.5"></circle><path
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            d="M12 8v4l2 2"></path></svg
+                        >
+                      </dt>
+                      <dd>
+                        <time datetime="2023-09-14"> 14 Sep 2021</time>
+                      </dd>
+                    </dl>
+                  </div>
+              </article>
             </li>
           </ol>
         </section>
         <section class="pt-10">
           <h2
-            class="text-sm font-normal uppercase tracking-wider text-slate-600"
+            class="text-sm font-medium uppercase tracking-wider text-slate-600"
           >
             Work
           </h2>
@@ -57,7 +151,11 @@ import Layout from "../layouts/Layout.astro";
             class="mt-3 list-disc space-y-4 text-slate-900 dark:text-slate-200"
           >
             <li class="list-none">
-              <a class="group flex w-full items-center space-x-2" href="/">
+              <a
+                class="group flex w-full items-center space-x-2"
+                href="https://www.wealthfront.com"
+                target="_blank"
+              >
                 <strong class="flex-none font-medium group-hover:underline"
                   >Wealthfront</strong
                 >
@@ -71,7 +169,11 @@ import Layout from "../layouts/Layout.astro";
               </a>
             </li>
             <li class="list-none">
-              <a class="group flex w-full items-center space-x-2" href="/">
+              <a
+                class="group flex w-full items-center space-x-2"
+                href="https://www.ciena.com/"
+                target="_blank"
+              >
                 <strong class="flex-none font-medium group-hover:underline"
                   >Ciena</strong
                 >
