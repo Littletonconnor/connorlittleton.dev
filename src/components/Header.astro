@@ -2,14 +2,21 @@
 
 ---
 
-<header>
-  <div>
-    <a class="logo" href="/">Connor Littleton</a>
+<header class="m-auto border-b border-slate-100 py-3 text-slate-800">
+  <div class="m-auto flex max-w-5xl items-baseline justify-between">
+    <a class="text-2xl font-bold" href="/">Connor Littleton</a>
     <nav>
-      <ul>
+      <ul class="flex gap-5">
         <li>
-          <a href="/blog">
-            <svg fill="none" viewBox="0 0 24 24" astro-icon="notebook"
+          <a
+            class="flex items-center gap-1 font-bold hover:underline"
+            href="/blog"
+          >
+            <svg
+              class="h-[1.25em] w-[1.25em]"
+              fill="none"
+              viewBox="0 0 24 24"
+              astro-icon="notebook"
               ><path
                 stroke="currentColor"
                 stroke-linecap="round"
@@ -21,8 +28,15 @@
              Blog</a
           >
           <li>
-            <a href="/recipes">
-              <svg fill="none" viewBox="0 0 24 24" astro-icon="notebook"
+            <a
+              class="flex items-center gap-1 font-bold hover:underline"
+              href="/recipes"
+            >
+              <svg
+                class="h-[1.25em] w-[1.25em]"
+                fill="none"
+                viewBox="0 0 24 24"
+                astro-icon="notebook"
                 ><path
                   stroke="currentColor"
                   stroke-linecap="round"
@@ -35,8 +49,15 @@
             >
           </li>
           <li>
-            <a href="/projects">
-              <svg fill="none" viewBox="0 0 24 24" astro-icon="multiple-folders"
+            <a
+              class="flex items-center gap-1 font-bold hover:underline"
+              href="/projects"
+            >
+              <svg
+                class="h-[1.25em] w-[1.25em]"
+                fill="none"
+                viewBox="0 0 24 24"
+                astro-icon="multiple-folders"
                 ><path
                   stroke="currentColor"
                   stroke-linecap="round"
@@ -55,45 +76,6 @@
 </header>
 
 <style>
-  .logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-  }
-
-  header {
-    margin: auto;
-    padding-block: 12px;
-    border-bottom: 1px solid #e5e7eb;
-  }
-
-  /* First div inside header */
-  header > div {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    max-width: var(--max-width);
-    margin: auto;
-  }
-
-  ul {
-    display: flex;
-    gap: 20px;
-  }
-
-  a > svg {
-    width: 1.25em;
-    height: 1.25em;
-  }
-
-  a {
-    display: flex;
-    gap: 4px;
-    align-items: center;
-    font-weight: 700;
-    text-decoration: none;
-    color: var(--text-color);
-  }
-
   a:hover {
     text-decoration: underline;
   }

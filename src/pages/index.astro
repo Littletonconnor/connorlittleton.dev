@@ -1,72 +1,92 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import { Image } from "astro:assets";
+import Avatar from "../../public/me.jpeg";
+
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Connor Littleton">
-  <main>This is my personal website!</main>
+  <main class="container mx-auto max-w-5xl py-14">
+    <div class="grid w-full gap-12 md:grid-cols-2">
+      <div class="h-auto overflow-hidden">
+        <Image
+          class="aspect-[16/9] h-full w-full rounded-2xl object-cover"
+          src={Avatar}
+          alt="Connor Littleton"
+        />
+      </div>
+      <div class="mx-auto max-w-xl space-y-6 py-9 md:mx-0">
+        <h1 class="text-4xl font-bold md:text-5xl">Hello There.</h1>
+        <p>
+          I'm <strong>Connor</strong> a Software engineer currently working on
+          the design system team
+          <a class="font-medium underline" href="https//www.wealthfront.com"
+            >Wealthfront</a
+          >.
+        </p>
+        <p>
+          In addition to my passion for programming, I enjoy exploring new
+          breweries and maintaining an active lifestyle through regular
+          workouts.
+        </p>
+        <section class="pt-6">
+          <h2
+            class="text-sm font-normal uppercase tracking-wider text-neutral-600"
+          >
+            Featured Posts
+          </h2>
+          <ol class="mt-3 space-y-4">
+            <li>
+              <article>Post 1</article>
+            </li>
+            <li>
+              <article>Post 2</article>
+            </li>
+            <li>
+              <article>Post 3</article>
+            </li>
+          </ol>
+        </section>
+        <section class="pt-10">
+          <h2
+            class="text-sm font-normal uppercase tracking-wider text-slate-600"
+          >
+            Work
+          </h2>
+          <ul
+            class="mt-3 list-disc space-y-4 text-slate-900 dark:text-slate-200"
+          >
+            <li class="list-none">
+              <a class="group flex w-full items-center space-x-2" href="/">
+                <strong class="flex-none font-medium group-hover:underline"
+                  >Wealthfront</strong
+                >
+                <span
+                  class="w-full shrink border-t border-dashed border-slate-300 dark:border-gray-800"
+                ></span>
+                <span class="flex-none">Software Engineer</span>
+                <span class="flex-none text-sm text-slate-600"
+                  >2021—&nbsp;&nbsp;</span
+                >
+              </a>
+            </li>
+            <li class="list-none">
+              <a class="group flex w-full items-center space-x-2" href="/">
+                <strong class="flex-none font-medium group-hover:underline"
+                  >Ciena</strong
+                >
+                <span
+                  class="w-full shrink border-t border-dashed border-slate-300 dark:border-gray-800"
+                ></span>
+                <span class="flex-none">Fullstack Software Engineer</span>
+                <span class="flex-none text-sm text-slate-600"
+                  >2019—&nbsp;&nbsp;</span
+                >
+              </a>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </main>
 </Layout>
-
-<style>
-  main {
-    margin: auto;
-    padding: 1rem;
-    width: 800px;
-    max-width: calc(100% - 2rem);
-    color: white;
-    font-size: 20px;
-    line-height: 1.6;
-
-    /* Remove me once content is filled in */
-    min-height: 800px;
-  }
-  .astro-a {
-    position: absolute;
-    top: -32px;
-    left: 50%;
-    transform: translatex(-50%);
-    width: 220px;
-    height: auto;
-    z-index: -1;
-  }
-  h1 {
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    margin-bottom: 1em;
-  }
-  .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
-  }
-  .instructions {
-    margin-bottom: 2rem;
-    border: 1px solid rgba(var(--accent-light), 25%);
-    background: linear-gradient(
-      rgba(var(--accent-dark), 66%),
-      rgba(var(--accent-dark), 33%)
-    );
-    padding: 1.5rem;
-    border-radius: 8px;
-  }
-  .instructions code {
-    font-size: 0.8em;
-    font-weight: bold;
-    background: rgba(var(--accent-light), 12%);
-    color: rgb(var(--accent-light));
-    border-radius: 4px;
-    padding: 0.3em 0.4em;
-  }
-  .instructions strong {
-    color: rgb(var(--accent-light));
-  }
-  .link-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-    gap: 2rem;
-    padding: 0;
-  }
-</style>
