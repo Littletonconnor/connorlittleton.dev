@@ -1,24 +1,37 @@
 ---
-
 let today = new Date().getFullYear();
 ---
 
-<footer class="border-t border-slate-200 w-full">
-  <div class="max-w-[calc(64rem-32px)] flex justify-between items-center px-3 py-4 mx-auto">
-    <span class="flex items-center space-x-1 text-sm px-3"
-      ><span>©</span>
-      <span>{today}</span>
-      <span>Connor Littleton</span></span
-    >
+<footer class="w-full border-t border-slate-300">
+  <div
+    class="mx-auto flex max-w-[calc(64rem-32px)] flex-col items-center justify-between px-3 py-4 md:flex-row"
+  >
+    <span class="flex space-x-1 px-3 text-sm"
+      ><span
+        >©
+        {today}
+        {" "}Connor Littleton
+      </span>
+    </span>
     <ul class="flex gap-4">
       <li>
-        <a class="text-slate-600 no-underline" href="https://github.com/Littletonconnor">Github</a>
+        <a
+          class="text-slate-600 no-underline"
+          href="https://github.com/Littletonconnor">Github</a
+        >
       </li>
       <li>
-        <a  class="text-slate-600 no-underline" href="https://www.linkedin.com/in/connor-littleton-31bb43135/">LinkedIn</a>
+        <a
+          class="text-slate-600 no-underline"
+          href="https://www.linkedin.com/in/connor-littleton-31bb43135/"
+          >LinkedIn</a
+        >
       </li>
       <li>
-        <a  class="text-slate-600 no-underline" href="mailto:'littletonconnor@gmail.com'">Email</a>
+        <a
+          class="text-slate-600 no-underline"
+          href="mailto:'littletonconnor@gmail.com'">Email</a
+        >
       </li>
     </ul>
   </div>
