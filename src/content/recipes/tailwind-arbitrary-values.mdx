@@ -1,0 +1,36 @@
+---
+title: Tailwind Arbitrary Values
+description: Tailwind allows for very flexible styling all from within their JIT compiler.
+pubDate: "2023-10-01"
+---
+
+import { Code } from "astro:components";
+
+I use Tailwind for many of my side projects and even use it exclusively at work. One of the things I think is really cool about Tailwind is
+it allows for very flexible styling all from within their JIT compiler. While they don't recommend doing this for everything, it's nice to know
+how to do it when you need an escape hatch (this usually applies when you're dealing with CSS you do not control).
+
+<br />
+**Styling all immediate p tags within a div**
+
+<Code
+  lang="js"
+  theme="github-dark"
+  code={`<div class="[&>p]:font-bold">
+  <span>Span 1</span>
+  <p>Text 1</p>
+  <p>Text 2</p>
+</div>`}
+/>
+
+**Style everything within a div**
+
+<Code
+  lang="js"
+  theme="github-dark"
+  code={`<div class="[&>*]:bg-slate-900 [&>*]:text-slate-100">
+  <span>Span 1</span>
+  <p>Text 1</p>
+  <p>Text 2</p>
+</div>`}
+/>
