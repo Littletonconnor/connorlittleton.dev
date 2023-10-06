@@ -1,0 +1,131 @@
+---
+title: Finding dead assets in code.
+description: How to find dead assets in your code.
+pubDate: "2023-10-05"
+---
+
+import { Code } from "astro:components";
+
+Recently at work I was tasked with finding out why the marketing site we deploy at work was coming in so large. Our site is a statically exported Next app, that includes a couple statically generated routes.
+
+One thing I knew up front was that we've never had a good way of detecting unused assets. We have a lot of images, and they're all located in a single public folder that gets included in the build. Luckily for us, we use a content hash in order to avoid cache busting issues.
+
+The content hash is built using a script that crawls our public directory. It's an object where the key is the human readable location of the asset and the value is the content hashed location of the same asset. Again, this avoids cache busting issues, so we can deploy a new version of the site and not have to worry about users having to clear their cache (especially in scenarios where the image is staying the same but the resolution changes).
+
+Here's what the content hash looks like:
+
+<Code
+  lang="js"
+  theme="github-dark"
+  code={`const assets_manifest = {
+  '/next/person.png': '/next/person.123.png,
+  '/next/person1.png': '/next/person.456.png,
+  '/next/person2.png': '/next/person3.789.png'
+  }`}
+/>
+
+It dawned on me that we could use this content hash to find out which assets were being used in our code. I wrote a script that extends the script we already have to generate the content hash that would crawl our codebase and find all the instances of the content hash. Then, I would compare that to the content hash object and find out which assets were being used.
+
+Here is a condensed version of that script!
+
+```js
+import { readdir, readFile } from "fs/promises";
+import path from "path";
+import { ASSETS_MANIFEST } from './assets_manifest';
+
+const ROOT_DIR = path.resolve(__dirname, '../..');
+const SRC_DIR = path.resolve(ROOT_DIR, "src");
+
+const PAGES_DIR = path.resolve(SRC_DIR, "pages");
+const COMPONENTS_DIR = path.resolve(SRC_DIR, "components");
+
+const DIRECTORIES_TO_SCAN = [PAGES_DIR, COMPONENTS_DIR];
+
+function getAssetManifestPaths() {
+  return Object.fromEntries(
+    Object.entries(ASSETS_MANIFEST)
+      // Avoid checking for dead assets in the fonts directory because they're used in the CSS
+      .filter(([key]) => !key.includes(".txt") && !key.includes("fonts"))
+      .map(([key]) => [key, false])
+  );
+}
+
+// Example:
+// {
+// '/assets/images/hero.jpg': false,
+// '/assets/images/hero@2x': false,
+// '/assets/images/hero@3x': false,
+// }
+const assetManifestPathsSeen = getAssetManifestPaths();
+
+// Recursively get all files in a directory.
+// exclude test files and scss files since we don't want to check for dead assets in those.
+async function getFilesRecursive(directoryPath: string) {
+  let allFiles: string[] = [];
+
+  const files = await readdir(directoryPath, { withFileTypes: true });
+
+  for (const file of files) {
+    const filePath = path.join(directoryPath, file.name);
+
+    if (file.isDirectory()) {
+      const subFiles = await getFilesRecursive(filePath);
+      allFiles = allFiles.concat(subFiles);
+    } else {
+      if (!filePath.includes("test") && !filePath.includes(".scss")) {
+        allFiles.push(filePath);
+      }
+    }
+  }
+
+  return allFiles;
+}
+
+async function getDeadAssets() {
+  // Using the recursive function we can check for all files in the directories we want to scan.
+  const allFiles = await Promise.all(
+    DIRECTORIES_TO_SCAN.map(getFilesRecursive)
+  );
+  const flatFiles = allFiles.flat();
+
+  for (const file of flatFiles) {
+    const content = await readFile(file, "utf8");
+
+    for (const asset of Object.keys(assetManifestPathsSeen)) {
+      if (content.includes(asset)) {
+        assetManifestPathsSeen[asset] = true;
+      }
+    }
+  }
+
+  assertOnDeadAssets(assetManifestPathsSeen);
+}
+
+function assertOnDeadAssets(assetManifestPathsSeen: Record<string, boolean>) {
+  let deadAssets = [];
+  for (const [asset, seen] of Object.entries(assetManifestPathsSeen)) {
+    if (!seen) {
+      deadAssets.push(asset);
+    }
+  }
+
+  if (deadAssets.length) {
+    throw new Error("Assets not found!");
+  }
+
+  console.log("No dead assets found!");
+}
+
+async function main() {
+  try {
+    await getDeadAssets();
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+main();
+
+```
+
+After implementing this script I was able to delete over 100MB of unused assets. Additionally I was able to start enforcing this script be run every time we deploy our site, which means we'll never have to worry about unused assets again.

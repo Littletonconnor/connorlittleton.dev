@@ -1,0 +1,37 @@
+---
+title: Tailwind Arbitrary Values
+description: Tailwind allows for very flexible styling all from within their JIT compiler.
+pubDate: "2023-10-01"
+---
+
+I often need to recursively get all files in a directory when writing node scripts. This is the solution I came up with. Not the most performant but it gets the job done.
+
+```ts
+// Recursively get all files in a directory.
+// exclude test files and scss files since we don't want to check for dead assets in those.
+async function getFilesRecursive(directoryPath: string) {
+  let allFiles: string[] = [];
+
+  const files = await readdir(directoryPath, { withFileTypes: true });
+
+  for (const file of files) {
+    const filePath = path.join(directoryPath, file.name);
+
+    if (file.isDirectory()) {
+      const subFiles = await getFilesRecursive(filePath);
+      allFiles = allFiles.concat(subFiles);
+    } else {
+      if (!filePath.includes("test") && !filePath.includes(".scss")) {
+        allFiles.push(filePath);
+      }
+    }
+  }
+
+  return allFiles;
+}
+
+const DIRECTORIES_TO_SCAN = ["dir1", "dir2", "dir3"];
+const allFiles = await Promise.all(DIRECTORIES_TO_SCAN.map(getFilesRecursive));
+```
+
+- See [finding dead assets](https://www.connorlittleton.dev/blog/finding-dead-assets) for how to use this in a script to find dead assets. It also includes more info on how to read the contents use the list of files returned from this function.
