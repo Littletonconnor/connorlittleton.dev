@@ -1,7 +1,30 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog");
 ---
 
 <Layout title="Connor Littleton | Blog Posts">
-  <main class="mx-auto max-w-[calc(64rem-32px)] pt-4">Blogs page</main>
+  <main class="mx-auto my-12 w-full max-w-2xl">
+    <h1 class="mb-6 text-3xl font-bold">Blog</h1>
+    <ul class="space-y-6">
+      {
+        posts.map((post) => (
+          <li>
+            <article>
+              <h2 class="text-xl font-bold">
+                <a href={`blog/${post.slug}`}>{post.data.title}</a>
+              </h2>
+              <div>
+                <p class="slate-700 text-base font-normal">
+                  {post.data.description}
+                </p>
+              </div>
+            </article>
+          </li>
+        ))
+      }
+    </ul>
+  </main>
 </Layout>
