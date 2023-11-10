@@ -1,0 +1,40 @@
+---
+title: Unveiling Jest Test Performance
+description: Learn how to effectively profile Jest tests to identify and fix memory leaks in your projects.
+pubDate: "2023-11-09"
+---
+
+Jest, a popular testing framework, is not immune to the occasional memory leak. During my work on a project with an extensive test suite, I observed a gradual increase in memory usage over time. Determined to pinpoint the tests responsible for these leaks, I embarked on the journey of profiling Jest tests—a process that proved less straightforward than expected. In this post, I'll document the steps I took, ensuring a clear roadmap for anyone facing a similar challenge.
+
+To initiate the profiling process, start by logging the memory usage of your Jest tests. This can be achieved by adding the `--logHeapUsage` flag to your test command:
+
+```sh
+node ./node_modules/jest/bin/jest.js --logHeapUsage --maxWorkers 16 "--reporters=default"
+```
+
+When this flag is enabled, each test will output its memory consumption. A telltale sign of a memory leak is a continuous increase in memory usage over time. To manage the potentially extensive output, consider piping the Jest results to a log file:
+
+```sh
+node ./node_modules/jest/bin/jest.js --logHeapUsage --maxWorkers 16 "--reporters=default" > jest.log 2>&1
+```
+
+However, this alone might flood your log file with unnecessary information. A more refined approach involves extracting only the lines related to "heap size":
+
+```sh
+# Capture all output and pipe it to a log file.
+node ./node_modules/jest/bin/jest.js --logHeapUsage --maxWorkers 16 "--reporters=default" > jest.log 2>&1
+
+# Extract lines containing "heap size" and direct them to a new log file.
+grep "heap size" jest.log >> jest-mem-usage.log
+```
+
+Now armed with this log file, you possess the necessary data to identify and assess potential memory leaks. For a quick overview of memory usage in megabytes, you can use commands like:
+
+```sh
+# Do this with 2,3,4, etc to see the different memory usage.
+grep -E '2[0-9][0-9] MB heap size' non-expose-gc2.log
+```
+
+Interestingly, the memory leak issue I encountered was not unique and has been acknowledged by the Jest community. Jest version 29, for instance, introduced a new flag, workerIdleMemoryLimit, designed to address cleanup concerns. You can explore more about it [here](https://jestjs.io/docs/configuration#workeridlememorylimit-numberstring).
+
+In my case, upgrading to Jest v29 and judiciously adjusting the workerIdleMemoryLimit resolved the problem. This experience underscores the importance of profiling tests to uncover and address performance bottlenecks. I hope this post proves valuable in guiding you through the process.
