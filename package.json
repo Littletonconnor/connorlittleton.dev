@@ -1,5 +1,5 @@
 {
-  "name": "Connorlittleton.dev",
+  "name": "connorlittleton.dev",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -7,7 +7,9 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write \"**/*.{astro,md,json,mdx}\""
   },
   "dependencies": {
     "@astrojs/mdx": "^1.0.3",

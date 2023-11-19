@@ -1,9 +1,19 @@
 ---
-import Layout from "../../layouts/Layout.astro";
+import { tag } from "../../../content/config";
 import { getCollection } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
 
+export async function getStaticPaths() {
+  return tag.map((tag) => ({ params: { slug: tag.toLowerCase() } }));
+}
+
+const { slug } = Astro.params;
 const posts = await getCollection("blog");
 const tags = new Set(["All"].concat(posts.map((post) => post.data.tag)));
+
+const filteredPosts = posts.filter((post) =>
+  post.data.tag.toLowerCase().includes(slug),
+);
 ---
 
 <Layout title="Connor Littleton | Blog Posts">
@@ -18,7 +28,7 @@ const tags = new Set(["All"].concat(posts.map((post) => post.data.tag)));
                 <li class="font-semibold inline-flex text-center transition-colors cursor-pointer no-underline px-2 py-1 text-sm/tight text-neutral-500 border rounded-lg  hover:bg-neutral-100 hover:border-neutral-300">
                   <a
                     href={
-                      tag === "All" ? "/blog" : `/blog/tag/${tag.toLowerCase()}`
+                      tag == "All" ? "/blog" : `/blog/tag/${tag.toLowerCase()}`
                     }
                   >
                     {tag}
@@ -31,13 +41,13 @@ const tags = new Set(["All"].concat(posts.map((post) => post.data.tag)));
       </div>
       <ul class="space-y-6">
         {
-          posts.map((post) => (
+          filteredPosts.map((post) => (
             <li>
               <article>
                 <h2 class="text-xl font-bold">
                   <a
                     class="underline underline-offset-2 hover:decoration-dotted"
-                    href={`blog/${post.slug}`}
+                    href={`/blog/${post.slug}`}
                   >
                     {post.data.title}
                   </a>
