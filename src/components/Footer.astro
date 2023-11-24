@@ -1,12 +1,31 @@
 ---
+const navLinks = [
+  {
+    label: "Github",
+    url: "https://github.com/Littletonconnor",
+  },
+  {
+    label: "LinkedIn",
+    url: "https://www.linkedin.com/in/connor-littleton-31bb43135/",
+  },
+  {
+    label: "Email",
+    url: "mailto:'littletonconnor@gmail.com'",
+  },
+  {
+    label: "Resume",
+    url: "/resume.pdf",
+  },
+];
+
 const today = new Date().getFullYear();
 ---
 
 <footer class="w-full border-t border-slate-300">
   <div
-    class="mx-auto flex max-w-[calc(64rem-32px)] flex-col items-center justify-between px-3 py-4 md:flex-row"
+    class="mx-auto flex max-w-2xl flex-col items-baseline justify-between space-y-2 px-3 py-4 md:flex-row"
   >
-    <span class="flex space-x-1 px-3 text-sm"
+    <span class="flex space-x-1 px-3"
       ><span
         >©
         {today}
@@ -14,31 +33,18 @@ const today = new Date().getFullYear();
       </span>
     </span>
     <ul class="flex gap-4">
-      <li>
-        <a
-          class="text-slate-600 decoration-blue-500 font-medium hover:underline underline-offset-2"
-          href="https://github.com/Littletonconnor">Github</a
-        >
-      </li>
-      <li>
-        <a
-          class="text-slate-600 decoration-blue-500 font-medium hover:underline underline-offset-2"
-          href="https://www.linkedin.com/in/connor-littleton-31bb43135/"
-          >LinkedIn</a
-        >
-      </li>
-      <li>
-        <a
-          class="text-slate-600 decoration-blue-500 font-medium hover:underline underline-offset-2"
-          href="mailto:'littletonconnor@gmail.com'">Email</a
-        >
-      </li>
-      <li>
-        <a
-          class="text-slate-600 decoration-blue-500 font-medium hover:underline underline-offset-2"
-          href="">Resume</a
-        >
-      </li>
+      {
+        navLinks.map((link) => (
+          <li>
+            <a
+              class="text-slate-600 decoration-blue-500 font-medium hover:underline underline-offset-2"
+              href={link.url}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
     </ul>
   </div>
 </footer>
