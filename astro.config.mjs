@@ -6,9 +6,15 @@ import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
 
 // https://astro.build/config
 export default defineConfig({
+  output: "server",
   integrations: [tailwind(), mdx()],
   markdown: {
     remarkPlugins: [remarkToc],
     rehypePlugins: [rehypeAccessibleEmojis],
   },
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true,
+    },
+  }),
 });
