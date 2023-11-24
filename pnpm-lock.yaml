@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
   '@astrojs/mdx':
     specifier: ^1.0.3
@@ -37,6 +33,9 @@ devDependencies:
   '@tailwindcss/typography':
     specifier: ^0.5.10
     version: 0.5.10(tailwindcss@3.3.3)
+  classnames:
+    specifier: ^2.3.2
+    version: 2.3.2
   prettier:
     specifier: ^3.0.3
     version: 3.0.3
@@ -1014,8 +1013,8 @@ packages:
       '@types/node': 17.0.45
     dev: false
 
-  /@types/ungap__structured-clone@0.3.2:
-    resolution: {integrity: sha512-a7oBPz4/IurTfw0/+R4F315npapBXlSimrQlmDfr0lo1Pv0BeHNADgbHXdDP8LCjnCiRne4jRSr/5UnQitX2og==}
+  /@types/ungap__structured-clone@0.3.3:
+    resolution: {integrity: sha512-RNmhIPwoip6K/zZOv3ypksTAqaqLEXvlNSXKyrC93xMSOAHZCR7PifW6xKZCwkbbnbM9dwB9X56PPoNTlNwEqw==}
     dev: false
 
   /@types/unist@2.0.8:
@@ -1352,6 +1351,10 @@ packages:
     resolution: {integrity: sha512-eXTggHWSooYhq49F2opQhuHWgzucfF2YgODK4e1566GQs5BIfP30B0oenwBJHfWxAs2fyPB1s7Mg949zLf61Yw==}
     engines: {node: '>=8'}
     dev: false
+
+  /classnames@2.3.2:
+    resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
+    dev: true
 
   /cli-boxes@3.0.0:
     resolution: {integrity: sha512-/lzGpEWL/8PfI0BmBOPRwp0c/wFNX1RdUML3jK/RcSBA9T8mZDdQpqYBKtCFTOfQbwPqWEOpjqW+Fnayc0969g==}
@@ -2406,7 +2409,7 @@ packages:
     resolution: {integrity: sha512-C28UcSqjmnWuvgT8d97qpaItHKvySqVPAECUzqQ51xuMyNFFJwcFoKW77KoMjtXrclTidLQFDzLUmTmrshRweA==}
     dependencies:
       '@types/mdast': 4.0.3
-      '@types/ungap__structured-clone': 0.3.2
+      '@types/ungap__structured-clone': 0.3.3
       '@ungap/structured-clone': 1.2.0
       github-slugger: 2.0.0
       mdast-util-to-string: 4.0.0
@@ -4104,3 +4107,7 @@ packages:
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
