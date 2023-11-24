@@ -4,6 +4,8 @@ import "@fontsource-variable/inter";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
+import "../styles/global.css";
+
 interface Props {
   title: string;
 }
@@ -29,62 +31,3 @@ const { title } = Astro.props;
     <Footer />
   </body>
 </html>
-
-<style is:global>
-  :root {
-    /* Colors */
-    --white: #fff;
-    --color-primary: #27272a;
-
-    /* Containers */
-    --max-width: 64rem;
-  }
-
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-  * {
-    margin: 0;
-  }
-
-  body {
-    -webkit-font-smoothing: antialiased;
-    font-family: "Inter Variable", sans-serif;
-    background: var(--white);
-    line-height: 1.5;
-    background: var(-white);
-    color: var(--color-primary);
-  }
-  pre {
-    border-radius: 12px;
-    padding: 16px;
-  }
-
-  img,
-  picture,
-  video,
-  canvas,
-  svg {
-    display: block;
-    max-width: 100%;
-  }
-
-  input,
-  button,
-  textarea,
-  select {
-    font: inherit;
-  }
-
-  p,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    overflow-wrap: break-word;
-  }
-</style>
