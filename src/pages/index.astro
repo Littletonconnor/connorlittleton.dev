@@ -1,194 +1,127 @@
 ---
-import { Image } from "astro:assets";
-import Avatar from "../../public/me.jpeg";
-
+import classnames from "classnames";
 import Layout from "../layouts/Layout.astro";
+
+const recentPosts = [
+  {
+    title: "Monorepos",
+    description: "All about the benefits monorepo's can bring to your company.",
+    link: "/blog/monorepo",
+  },
+  {
+    title: "Jest Memory Issues",
+    description:
+      "Some useful tips and tricks to debugging memory issues in Jest.",
+    link: "/blog/jest-memory-issues",
+  },
+  {
+    title: "Content Deliver Networks",
+    description: "The importance of CDNs and how they can help your site.",
+    link: "/blog/cdn",
+  },
+];
+
+const projects = [
+  {
+    title: "cwl-monorepo",
+    description: "A practical monorepo built with Turborepo.",
+    link: "https://github.com/Littletonconnor/cwl-monorepo",
+    status: "in-progress",
+  },
+  {
+    title: "cwl-ui",
+    description: "Accessible Component library for React.",
+    link: "https://github.com/Littletonconnor/ui",
+    status: "in-progress",
+  },
+  {
+    title: "connorlittleton.api",
+    description: "A custom JSONPlaceholder like API",
+    link: "https://github.com/Littletonconnor/connorlittleton.api",
+    status: "in-progress",
+  },
+  {
+    title: "workout-tracker",
+    description: "A custom workout tracker built with Remix.",
+    link: "https://github.com/Littletonconnor/ui",
+    status: "todo",
+  },
+];
 ---
 
 <Layout title="Connor Littleton">
-  <main class="container mx-auto max-w-[calc(64rem-32px)] px-4 py-14">
-    <div class="grid w-full gap-12 lg:grid-cols-2">
-      <div class="h-auto overflow-hidden">
-        <Image
-          class="aspect-[16/9] h-full w-full rounded-2xl object-cover"
-          src={Avatar}
-          alt="Connor Littleton"
-        />
-      </div>
-      <div class="mx-auto max-w-xl space-y-6 py-9 md:mx-0">
-        <h1 class="text-4xl font-bold md:text-5xl">Hello There.</h1>
-        <p>
+  <main class="w-full mx-auto max-w-2xl px-4 py-14">
+    <div class="space-y-16">
+      <div class="space-y-4">
+        <h1 class="lg:text-center text-2xl font-bold md:text-3xl">
+          Hello There. 👋
+        </h1>
+        <p class="text-lg">
           I'm <strong>Connor</strong> a Software engineer currently working on
-          the design system team
-          <a class="font-medium underline" href="https://www.wealthfront.com"
-            >Wealthfront</a
-          >.
-        </p>
-        <p>
+          the Design System team
+          <a
+            class="text-blue-500 font-medium underline"
+            href="https://www.wealthfront.com">Wealthfront</a
+          >. I am a big fan of continous learning and enjoy working on a wide
+          range of Web related technologies. On this site you will find various
+          blog posts and recipes that I have found useful in my day to day work.
           In addition to my passion for programming, I enjoy exploring new
           breweries and maintaining an active lifestyle through regular
           workouts.
         </p>
-        <section class="pt-6">
-          <h2
-            class="text-sm font-medium uppercase tracking-wider text-neutral-600"
-          >
-            Featured Posts
-          </h2>
-          <ol class="mt-3 space-y-4">
-            <li>
-              <article class="group">
-                <h2 class="text-lg font-semibold hover:underline">
-                  <a href="/blog/monorepo">Monorepos</a>
-                </h2>
-                <div class="flex flex-col gap-1.5">
-                  <p class="text-slate-600 text-sm">
-                    All about the benefits monorepo's can bring to your company.
-                  </p>
-                  <dl class="text-xs text-slate-600 flex gap-1 items-center">
-                    <dt>
-                      <svg
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        class="h-[1.25em] w-[1.25em]"
-                        astro-icon="clock"
-                        ><circle
-                          cx="12"
-                          cy="12"
-                          r="7.25"
-                          stroke="currentColor"
-                          stroke-width="1.5"></circle><path
-                          stroke="currentColor"
-                          stroke-width="1.5"
-                          d="M12 8v4l2 2"></path></svg
-                      >
-                    </dt>
-                    <dd>
-                      <time datetime="2023-09-14"> 14 Sep 2021</time>
-                    </dd>
-                  </dl>
-                </div>
-              </article>
-            </li>
-            <li>
-              <article>
-                <h2 class="text-lg font-semibold hover:underline">
-                  <a href="/blog/monorepo">Jest Memory Issues</a>
-                </h2>
-                <div class="flex flex-col gap-1.5">
-                  <p class="text-slate-600 text-sm">
-                    Some useful tips and tricks to debugging memory issues in
-                    Jest.
-                  </p>
-                  <dl class="text-xs text-slate-600 flex gap-1 items-center">
-                    <dt>
-                      <svg
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        class="h-[1.25em] w-[1.25em]"
-                        astro-icon="clock"
-                        ><circle
-                          cx="12"
-                          cy="12"
-                          r="7.25"
-                          stroke="currentColor"
-                          stroke-width="1.5"></circle><path
-                          stroke="currentColor"
-                          stroke-width="1.5"
-                          d="M12 8v4l2 2"></path></svg
-                      >
-                    </dt>
-                    <dd>
-                      <time datetime="2023-09-14"> 14 Sep 2021</time>
-                    </dd>
-                  </dl>
-                </div>
-              </article>
-            </li>
-            <li>
-              <article>
-                <h2 class="text-lg font-semibold hover:underline">
-                  <a href="/blog/cdn">Content Deliver Networks</a>
-                </h2>
-                <div class="flex flex-col gap-1.5">
-                  <p class="text-slate-600 text-sm">
-                    The importance of CDNs and how they can help your site.
-                  </p>
-                  <dl class="text-xs text-slate-600 flex gap-1 items-center">
-                    <dt>
-                      <svg
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        class="h-[1.25em] w-[1.25em]"
-                        astro-icon="clock"
-                        ><circle
-                          cx="12"
-                          cy="12"
-                          r="7.25"
-                          stroke="currentColor"
-                          stroke-width="1.5"></circle><path
-                          stroke="currentColor"
-                          stroke-width="1.5"
-                          d="M12 8v4l2 2"></path></svg
-                      >
-                    </dt>
-                    <dd>
-                      <time datetime="2023-09-14"> 14 Sep 2021</time>
-                    </dd>
-                  </dl>
-                </div>
-              </article>
-            </li>
-          </ol>
-        </section>
-        <section class="pt-10">
-          <h2
-            class="text-sm font-medium uppercase tracking-wider text-slate-600"
-          >
-            Work
-          </h2>
-          <ul
-            class="mt-3 list-disc space-y-4 text-slate-900 dark:text-slate-200"
-          >
-            <li class="list-none">
-              <a
-                class="group flex w-full items-center space-x-2"
-                href="https://www.wealthfront.com"
-                target="_blank"
-              >
-                <strong class="flex-none font-medium group-hover:underline"
-                  >Wealthfront</strong
-                >
-                <span
-                  class="w-full shrink border-t border-dashed border-slate-300 dark:border-gray-800"
-                ></span>
-                <span class="flex-none">Software Engineer</span>
-                <span class="flex-none text-sm text-slate-600"
-                  >2021—&nbsp;&nbsp;</span
-                >
-              </a>
-            </li>
-            <li class="list-none">
-              <a
-                class="group flex w-full items-center space-x-2"
-                href="https://www.ciena.com/"
-                target="_blank"
-              >
-                <strong class="flex-none font-medium group-hover:underline"
-                  >Ciena</strong
-                >
-                <span
-                  class="w-full shrink border-t border-dashed border-slate-300 dark:border-gray-800"
-                ></span>
-                <span class="flex-none">Fullstack Software Engineer</span>
-                <span class="flex-none text-sm text-slate-600"
-                  >2019—&nbsp;&nbsp;</span
-                >
-              </a>
-            </li>
-          </ul>
-        </section>
       </div>
+      <section>
+        <div class="space-y-2">
+          <h2 class="text-xl font-bold md:text-2xl">Recent Posts</h2>
+          <ol class="space-y-4">
+            {
+              recentPosts.map((post) => (
+                <li>
+                  <article class="group cursor-pointer">
+                    <h2 class="text-lg font-medium group-hover:underline decoration-blue-500 underline-offset-2">
+                      <a href={post.link}>{post.title}</a>
+                    </h2>
+                    <p class="text-slate-700 text-base">{post.description}</p>
+                  </article>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </section>
+      <section>
+        <div class="space-y-2">
+          <h2 class="text-xl font-bold md:text-2xl">Projects</h2>
+          <ol class="space-y-4">
+            {
+              projects.map((project) => (
+                <li>
+                  <article class="border border-gray-200 rounded-lg p-4 group cursor-pointer">
+                    <div class="w-full flex items-center justify-between">
+                      <h2 class="text-lg font-medium hover:underline decoration-blue-500 underline-offset-2 group-hover:underline">
+                        <a href={project.link}>{project.title}</a>
+                      </h2>
+                      <div
+                        class={classnames(
+                          "rounded-full px-2 py-1 w-fit text-white text-xs",
+                          { "bg-orange-500": project.status === "in-progress" },
+                          { "bg-green-500": project.status === "complete" },
+                          { "bg-blue-500": project.status === "todo" },
+                        )}
+                      >
+                        {project.status}
+                      </div>
+                    </div>
+                    <p class="text-slate-700 text-base">
+                      {project.description}
+                    </p>
+                  </article>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </section>
     </div>
   </main>
 </Layout>

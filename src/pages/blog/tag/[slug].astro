@@ -1,6 +1,7 @@
 ---
-import { tag } from "../../../content/config";
 import { getCollection } from "astro:content";
+import classnames from "classnames";
+import { tag } from "../../../content/config";
 import Layout from "../../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
@@ -25,8 +26,12 @@ const filteredPosts = posts.filter((post) =>
           {
             Array.from(tags).map((tag) => {
               return (
-                <li class="font-semibold inline-flex text-center transition-colors cursor-pointer no-underline px-2 py-1 text-sm/tight text-neutral-500 border rounded-lg  hover:bg-neutral-100 hover:border-neutral-300">
+                <li class="font-semibold inline-flex text-center transition-colors cursor-pointer text-neutral-500 border rounded-lg hover:bg-neutral-100 hover:border-neutral-300">
                   <a
+                    class={classnames("no-underline px-2 py-1 text-sm/tight", {
+                      "text-blue-500 bg-neutral-100 border-neutral-300":
+                        tag.toLowerCase() == slug,
+                    })}
                     href={
                       tag == "All" ? "/blog" : `/blog/tag/${tag.toLowerCase()}`
                     }
@@ -46,7 +51,7 @@ const filteredPosts = posts.filter((post) =>
               <article>
                 <h2 class="text-xl font-bold">
                   <a
-                    class="underline underline-offset-2 hover:decoration-dotted"
+                    class="hover:underline decoration-blue-500 underline-offset-2"
                     href={`/blog/${post.slug}`}
                   >
                     {post.data.title}
