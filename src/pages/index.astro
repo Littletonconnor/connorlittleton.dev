@@ -2,7 +2,7 @@
 import classnames from "classnames";
 import Layout from "../layouts/Layout.astro";
 
-const recentPosts = [
+const popularPosts = [
   {
     title: "Comprehensive Guide to Redis",
     description: "Explore the workings and usage of Redis.",
@@ -37,8 +37,8 @@ const projects = [
   {
     title: "workout-tracker",
     description: "A custom workout tracker built with Remix.",
-    link: "https://github.com/Littletonconnor/ui",
-    status: "todo",
+    link: "https://github.com/Littletonconnor/strength-plus",
+    status: "in-progress",
   },
 ];
 ---
@@ -66,10 +66,10 @@ const projects = [
       </div>
       <section>
         <div class="space-y-2">
-          <h2 class="text-xl font-bold md:text-2xl">Recent Posts</h2>
+          <h2 class="text-xl font-bold md:text-2xl">Popular Posts</h2>
           <ol class="space-y-4">
             {
-              recentPosts.map((post) => (
+              popularPosts.map((post) => (
                 <li>
                   <article class="group cursor-pointer">
                     <h2 class="text-lg font-medium group-hover:underline decoration-blue-500 underline-offset-2">

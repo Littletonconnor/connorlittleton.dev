@@ -1,0 +1,19 @@
+---
+title: TS Tips
+description: Miscellaneous TS tips and tricks
+tag: Recipe
+pubDate: "2023-12-05"
+---
+
+Common TS tips and tricks I forget about, this is more of a personal reference for me.
+
+## Typed Object.Entries
+
+```ts
+type Entries<T> = {
+  [K in keyof T]: [K, T[K]];
+};
+
+const getEntries = <T extends object>(obj: T) =>
+  Object.entries(obj) as Entries<T>;
+```

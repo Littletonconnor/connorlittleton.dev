@@ -1,0 +1,39 @@
+---
+title: JS Tips
+description: Miscellaneous JS tips and tricks
+tag: Recipe
+pubDate: "2023-12-05"
+---
+
+Common JS tips and tricks I forget about, this is more of a personal reference for me.
+
+## For Loops
+
+In Javascript, for...in and for...of are two different types of loops that serve different purposes.
+
+**for...in**: This loop is used for iterating over the enumerable properties of an object. It returns the keys (property names) of an object. If used on an array, it will return the indices, not the values.
+
+```js
+let obj = { a: 1, b: 2, c: 3 };
+for (let key in obj) {
+  console.log(key); // logs 'a', 'b', 'c'
+}
+
+let obj2 = [1, 2, 3];
+for (let key in obj2) {
+  console.log(key); // logs '0', '1', '2'
+}
+```
+
+**for...of**: This loop is used for iterating over iterable objects like arrays, strings, maps, sets, etc. It returns that values of the iterable object, not the keys or indices.
+
+```js
+let arr = ["a", "b", "c"];
+
+for (let value of arr) {
+  console.log(value); // logs 'a', 'b', 'c'
+}
+```
+
+- Use for...of when you need to iterate over the values of an iterable.
+- Use for...in when you need to iterate over the keys or indices of an object.

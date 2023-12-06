@@ -35,6 +35,4 @@ const DIRECTORIES_TO_SCAN = ["dir1", "dir2", "dir3"];
 const allFiles = await Promise.all(DIRECTORIES_TO_SCAN.map(getFilesRecursive));
 ```
 
-> Blockquote
-
 - See [finding dead assets](https://www.connorlittleton.dev/blog/finding-dead-assets) for how to use this in a script to find dead assets. It also includes more info on how to read the contents use the list of files returned from this function.
