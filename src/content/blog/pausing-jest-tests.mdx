@@ -1,0 +1,61 @@
+---
+title: Pausing Test Execution in Jest
+tag: Recipe
+description: A step-by-step guide on how to pause your tests in Jest.
+pubDate: "2023-12-06"
+---
+
+Ever found yourself wanting to hit the pause button on a unit test to check out what's happening with your component at a certain point? I know I have.
+
+Let's take a look at a simple button component:
+
+```jsx
+import React from "react";
+
+const Button = ({ onClick, disabled, children }) => (
+  <button onClick={onClick} disabled={disabled}>
+    {children}
+  </button>
+);
+
+export default Button;
+```
+
+Now, say you want to test the disabled state of this button. Sounds easy, right? Well, not so fast. It gets a bit tricky when the onClick function might set disabled to true, and then flip it back to false at the end. So, how do we get around this?
+
+Here's an example onClick function:
+
+```jsx
+const onClick = () => {
+  setDisabled(true);
+  // do some async stuff
+  setDisabled(false);
+};
+```
+
+Here's a neat trick: we can create a promise that won't resolve until we call resolve(). Then, we can use await to hold up the test until the promise is resolved.
+
+```jsx
+import React from "react";
+import { render, fireEvent, waitFor } from "@testing-library/react";
+import Button from "./Button";
+
+test("Button is disabled after click", async () => {
+  let manualResolve;
+  const onClick = jest.fn(
+    () =>
+      new Promise((resolve) => {
+        manualResolve = resolve;
+      }),
+  );
+  const { getByText } = render(<Button onClick={onClick}>Click me</Button>);
+  const button = getByText("Click me");
+  fireEvent.click(button);
+  await waitFor(() => expect(button).toBeDisabled());
+
+  manualResolve();
+  await waitFor(() => expect(button).not.toBeDisabled());
+});
+```
+
+And there you have it! A handy way to pause your tests and check out what's going on with your components.
