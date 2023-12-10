@@ -37,3 +37,32 @@ for (let value of arr) {
 
 - Use for...of when you need to iterate over the values of an iterable.
 - Use for...in when you need to iterate over the keys or indices of an object.
+
+## Empty grids
+
+When dealing with grid like data structures its common to need to create an empty grid. This is a simple way to do it.
+
+```ts
+function main() {
+  let n = 4; // rows
+  let m = 3; // columns
+
+  function createGrid(n: number, m: number) {
+    return Array.from({ length: n }, () => Array.from({ length: m }, () => []));
+  }
+
+  let grid = createGrid(n, m);
+  /*
+  [
+    [[], [], []],
+    [[], [], []],
+    [[], [], []],
+    [[], [], []]
+  ]
+  */
+}
+```
+
+- `n` is the number of rows
+- `m` is the number of columns
+- `createGrid` returns an array of length `n` where each element is an array of length `m` where each element is an empty array
