@@ -1,0 +1,54 @@
+---
+title: Pub Sub Pattern
+tag: Web
+description: Pub Sub Pattern
+pubDate: "2023-12-11"
+---
+
+The Pub Sub pattern is a pattern that allows us to subscribe to events and publish events. This is a very common pattern in JavaScript and is used in many libraries such as React, Redux, and RxJS.
+
+Here is a basic implementation of the Pub Sub pattern.
+
+```js
+class PubSub {
+  constructor() {
+    this.events = {};
+  }
+
+  subscribe(e, cb) {
+    if (this.events[e]) {
+      this.events[e].push(cb);
+    } else {
+      this.events[e] = [cb];
+    }
+  }
+
+  publish(e) {
+    if (this.events[e]) {
+      this.events[e].forEach((cb) => {
+        cb();
+      });
+    }
+  }
+
+  print() {
+    console.log("Events", this.events);
+  }
+}
+
+const pubSub = new PubSub();
+
+function event1() {
+  console.log("Publishing to Event 1");
+}
+
+function event2() {
+  console.log("Publishing Event 2");
+}
+
+pubSub.subscribe("event1", event1);
+pubSub.subscribe("event2", event2);
+
+pubSub.publish("event1", event1);
+pubSub.publish("event2", event2);
+```
