@@ -1,22 +1,10 @@
 ---
 import { getCollection } from "astro:content";
 import classnames from "classnames";
-import { blogTags } from "../../../content/config";
-import Layout from "../../../layouts/Layout.astro";
+import Layout from "../../layouts/Layout.astro";
 
-export const prerender = true;
-
-export async function getStaticPaths() {
-  return blogTags.map((tag) => ({ params: { slug: tag.toLowerCase() } }));
-}
-
-const { slug } = Astro.params;
-const posts = await getCollection("blog");
-const tags = new Set(["All"].concat(posts.map((post) => post.data.tag)));
-
-const filteredPosts = posts.filter((post) =>
-  post.data.tag.toLowerCase().includes(slug),
-);
+const books = await getCollection("books");
+const tags = new Set(["All"].concat(books.map((book) => book.data.tag)));
 ---
 
 <Layout title="Connor Littleton | Blog Posts">
@@ -32,12 +20,10 @@ const filteredPosts = posts.filter((post) =>
                   <a
                     class={classnames("no-underline px-2 py-1 text-sm/tight", {
                       "text-blue-500 bg-neutral-100 border-neutral-300":
-                        tag.toLowerCase() == slug,
+                        tag.toLowerCase() == "all",
                     })}
                     href={
-                      tag == "All"
-                        ? "/books"
-                        : `/books/tag/${tag.toLowerCase()}`
+                      tag == "All" ? "/blog" : `/blog/tag/${tag.toLowerCase()}`
                     }
                   >
                     {tag}
@@ -50,13 +36,13 @@ const filteredPosts = posts.filter((post) =>
       </div>
       <ul class="space-y-6">
         {
-          filteredPosts.map((post) => (
+          books.map((post) => (
             <li>
               <article>
                 <h2 class="text-xl font-bold">
                   <a
                     class="hover:underline decoration-blue-500 underline-offset-2"
-                    href={`/blog/${post.slug}`}
+                    href={`blog/${post.slug}`}
                   >
                     {post.data.title}
                   </a>
