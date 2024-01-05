@@ -35,9 +35,7 @@ const filteredPosts = posts.filter((post) =>
                         tag.toLowerCase() == slug,
                     })}
                     href={
-                      tag == "All"
-                        ? "/books"
-                        : `/books/tag/${tag.toLowerCase()}`
+                      tag == "All" ? "/blog" : `/blog/tag/${tag.toLowerCase()}`
                     }
                   >
                     {tag}

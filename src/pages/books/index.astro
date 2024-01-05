@@ -7,11 +7,11 @@ const books = await getCollection("books");
 const tags = new Set(["All"].concat(books.map((book) => book.data.tag)));
 ---
 
-<Layout title="Connor Littleton | Blog Posts">
+<Layout title="Connor Littleton | Books">
   <main class="mx-auto w-full max-w-2xl px-4 py-14">
     <div class="space-y-4">
       <div class="space-y-1">
-        <h1 class="text-3xl font-bold">Blog</h1>
+        <h1 class="text-3xl font-bold">Books</h1>
         <ul class="flex list-none justify-start flex-wrap -m-1 [&>li]:m-1">
           {
             Array.from(tags).map((tag) => {
@@ -23,7 +23,9 @@ const tags = new Set(["All"].concat(books.map((book) => book.data.tag)));
                         tag.toLowerCase() == "all",
                     })}
                     href={
-                      tag == "All" ? "/blog" : `/blog/tag/${tag.toLowerCase()}`
+                      tag == "All"
+                        ? "/books"
+                        : `/books/tag/${tag.toLowerCase()}`
                     }
                   >
                     {tag}
@@ -42,7 +44,7 @@ const tags = new Set(["All"].concat(books.map((book) => book.data.tag)));
                 <h2 class="text-xl font-bold">
                   <a
                     class="hover:underline decoration-blue-500 underline-offset-2"
-                    href={`blog/${post.slug}`}
+                    href={`books/${post.slug}`}
                   >
                     {post.data.title}
                   </a>
