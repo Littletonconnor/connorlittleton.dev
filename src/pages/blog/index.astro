@@ -16,7 +16,7 @@ const tags = new Set(["All"].concat(posts.map((post) => post.data.tag)));
           {
             Array.from(tags).map((tag) => {
               return (
-                <li class="font-semibold inline-flex text-center transition-colors cursor-pointer text-neutral-500 border rounded-lg hover:bg-neutral-100 hover:border-neutral-300">
+                <li class="overflow-hidden font-semibold inline-flex text-center transition-colors cursor-pointer text-neutral-500 border rounded-lg hover:bg-neutral-100 hover:border-neutral-300">
                   <a
                     class={classnames("no-underline px-2 py-1 text-sm/tight", {
                       "text-blue-500 bg-neutral-100 border-neutral-300":
