@@ -1,0 +1,112 @@
+---
+title: How to use RipGrep
+tag: Scripting
+description: How to use RipGrep to search for text in files.
+pubDate: "2024-02-5"
+---
+
+RipGrep is a command line tool that searches for text in files. It is similar to `grep` but is faster and has a more user-friendly interface. In this article, we will learn how to use RipGrep to search for text in files.
+
+this guide is a reminder to myself on commonly used ways to interact with RipGrep. It is an incredible useful tool for searching for text in files. It is similar to `grep` but is faster and has a more user-friendly interface.
+
+### Basic Usage
+
+```sh
+rg pattern
+```
+
+- The simplest way to use ripgrep is to just pass it a search pattern. For example, rg pattern will search the current directory for any file containing the word "pattern".
+
+### Case Insensitive Search
+
+```sh
+rg -i pattern
+```
+
+- Use the -i or --ignore-case flag to make your search case-insensitive
+
+### Whole word search
+
+```sh
+rg -w pattern
+```
+
+- Use the -w or --word-regexp flag to only match whole words.
+
+### Line number
+
+```sh
+rg -n pattern
+```
+
+- Use the -n or --line-number flag to display the line number of each match.
+
+### File type
+
+```sh
+rg -tts pattern
+```
+
+- Use the --type flag to specify the file type to search.
+
+### Count Matches
+
+```sh
+rg -c pattern
+```
+
+- Use the -c or --count flag to display the number of matches in each file.
+
+### Search in a specific directory
+
+```sh
+rg pattern /path/to/directory
+```
+
+- By default, ripgrep searches the current directory. You can specify a different directory to search by passing it as an argument.
+
+### Ignore files / directories
+
+```sh
+rg pattern --glob '!*.log'
+```
+
+- Use the --glob flag to specify files or directories to ignore.
+
+### Using a glob
+
+```sh
+rg pattern --glob '*.js'
+```
+
+- Use the --glob flag to specify a glob pattern to search for.
+
+### Files with matches
+
+```sh
+rg -l pattern
+```
+
+- Use the -l or --files-with-matches flag to display the names of files that contain a match.
+
+The -l flag is particularly useful to pipe ripgrep's output into another program and perform additional operations on the matching files. For example, you could use ripgrep to find all files matching the string @format and format them with Prettier using the prettier executable:
+
+```sh
+rg -l @format | xargs prettier --write
+```
+
+### Fixed Strings
+
+    ```sh
+    rg -F pattern
+    ```
+
+- Use the -F or --fixed-strings flag to search for a fixed string instead of a regular expression.
+
+# Context around a match
+
+```sh
+rg -C 3 pattern
+```
+
+- Use the -C or --context flag to display the specified number of lines of context around each match.
