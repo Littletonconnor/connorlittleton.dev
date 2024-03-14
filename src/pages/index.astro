@@ -20,25 +20,16 @@ const projects = [
     title: "cwl-monorepo",
     description: "A practical monorepo built with Turborepo.",
     link: "https://github.com/Littletonconnor/cwl-monorepo",
-    status: "in-progress",
   },
   {
     title: "cwl-ui",
     description: "Accessible Component library for React.",
     link: "https://github.com/Littletonconnor/ui",
-    status: "in-progress",
   },
   {
     title: "connorlittleton.api",
     description: "A custom JSONPlaceholder like API",
     link: "https://github.com/Littletonconnor/connorlittleton.api",
-    status: "in-progress",
-  },
-  {
-    title: "workout-tracker",
-    description: "A custom workout tracker built with Remix.",
-    link: "https://github.com/Littletonconnor/strength-plus",
-    status: "in-progress",
   },
 ];
 ---
@@ -95,16 +86,6 @@ const projects = [
                       <h2 class="text-lg font-medium hover:underline decoration-blue-500 underline-offset-2 group-hover:underline">
                         <a href={project.link}>{project.title}</a>
                       </h2>
-                      <div
-                        class={classnames(
-                          "rounded-full px-2 py-1 w-fit text-white text-xs",
-                          { "bg-orange-500": project.status === "in-progress" },
-                          { "bg-green-500": project.status === "complete" },
-                          { "bg-blue-500": project.status === "todo" },
-                        )}
-                      >
-                        {project.status}
-                      </div>
                     </div>
                     <p class="text-slate-700 text-base">
                       {project.description}
