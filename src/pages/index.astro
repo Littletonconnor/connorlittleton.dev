@@ -1,102 +1,69 @@
 ---
-import classnames from "classnames";
 import Layout from "../layouts/Layout.astro";
-
-const popularPosts = [
-  {
-    title: "Comprehensive Guide to Redis",
-    description: "Explore the workings and usage of Redis.",
-    link: "/blog/redis",
-  },
-  {
-    title: "Monorepos",
-    description: "All about the benefits monorepo's can bring to your company.",
-    link: "/blog/monorepo",
-  },
-];
-
-const projects = [
-  {
-    title: "cwl-monorepo",
-    description: "A practical monorepo built with Turborepo.",
-    link: "https://github.com/Littletonconnor/cwl-monorepo",
-  },
-  {
-    title: "cwl-ui",
-    description: "Accessible Component library for React.",
-    link: "https://github.com/Littletonconnor/ui",
-  },
-  {
-    title: "connorlittleton.api",
-    description: "A custom JSONPlaceholder like API",
-    link: "https://github.com/Littletonconnor/connorlittleton.api",
-  },
-];
 ---
 
 <Layout title="Connor Littleton">
-  <main class="w-full mx-auto max-w-2xl px-4 py-14">
-    <div class="space-y-16">
-      <div class="space-y-4">
-        <h1 class="lg:text-center text-2xl font-bold md:text-3xl">
-          Hello There. 👋
-        </h1>
-        <p class="text-lg">
-          I'm <strong>Connor</strong> a Software engineer currently working on
-          the Design System team
-          <a
-            class="font-semibold underline decoration-blue-500 hover:decoration-2 underline-offset-2"
-            href="https://www.wealthfront.com">Wealthfront</a
-          >. I am a big fan of continous learning and enjoy working on a wide
-          range of Web related technologies. On this site you will find various
-          blog posts and recipes that I have found useful in my day to day work.
-          In addition to my passion for programming, I enjoy exploring new
-          breweries and maintaining an active lifestyle through regular
-          workouts.
-        </p>
+  <main class="">
+    <span class="mb-5 block font-medium sm:mb-6">Today</span>
+    <p class="text-[#63635e]">
+      Today I currently work as the design system engineering lead and on-call
+      lead at Wealthfront. I enjoy working on design systems and thinking deeply
+      about how to scale effective teams.
+    </p>
+    <div class="-mb-3 mt-16 sm:mt-32">
+      <span class="mb-5 block font-medium sm:mb-4">Journal</span>
+      <div class="flex flex-col gap-7 sm:gap-4">
+        <a
+          href="/blog/monorepo"
+          class="-mx-3 flex flex-col rounded-md px-3 no-underline hover:bg-[#e7e6e6] dark:hover:bg-gray-200 sm:py-3"
+        >
+          <span>Navigating the Monorepo tooling landscape</span>
+          <span class="text-[#63637D]"
+            >A practical guide to migrating to modern monorepo tooling.</span
+          >
+        </a>
       </div>
-      <section>
-        <div class="space-y-2">
-          <h2 class="text-xl font-bold md:text-2xl">Popular Posts</h2>
-          <ol class="space-y-4">
-            {
-              popularPosts.map((post) => (
-                <li>
-                  <article class="group cursor-pointer">
-                    <h2 class="text-lg font-medium group-hover:underline decoration-blue-500 underline-offset-2">
-                      <a href={post.link}>{post.title}</a>
-                    </h2>
-                    <p class="text-slate-700 text-base">{post.description}</p>
-                  </article>
-                </li>
-              ))
-            }
-          </ol>
-        </div>
-      </section>
-      <section>
-        <div class="space-y-2">
-          <h2 class="text-xl font-bold md:text-2xl">Projects</h2>
-          <ol class="space-y-4">
-            {
-              projects.map((project) => (
-                <li>
-                  <article class="border border-gray-200 rounded-lg p-4 group cursor-pointer">
-                    <div class="w-full flex items-center justify-between">
-                      <h2 class="text-lg font-medium hover:underline decoration-blue-500 underline-offset-2 group-hover:underline">
-                        <a href={project.link}>{project.title}</a>
-                      </h2>
-                    </div>
-                    <p class="text-slate-700 text-base">
-                      {project.description}
-                    </p>
-                  </article>
-                </li>
-              ))
-            }
-          </ol>
-        </div>
-      </section>
+    </div>
+    <div class="-mb-3 mt-16 sm:mt-32">
+      <span class="mb-5 block font-medium sm:mb-4">Projects</span>
+      <div class="flex flex-col gap-7 sm:gap-4">
+        <a
+          href="https://github.com/Littletonconnor/cwl-ui"
+          target="_blank"
+          class="-mx-3 flex flex-col rounded-md px-3 no-underline hover:bg-[#e7e6e6] dark:hover:bg-gray-200 sm:py-3"
+        >
+          <span>Cwl UI</span>
+          <span class="text-[#63637D]">My personal design system library.</span>
+        </a>
+        <a
+          href="https://github.com/Littletonconnor/cwl-monorepo"
+          class="-mx-3 flex flex-col rounded-md px-3 no-underline hover:bg-[#e7e6e6] dark:hover:bg-gray-200 sm:py-3"
+          target="_blank"
+        >
+          <span>Cwl Monorepo</span>
+          <span class="text-[#63637D]"
+            >A practical monorepo for modern development.</span
+          >
+        </a>
+        <a
+          href="https://github.com/Littletonconnor/connorlittleton.api"
+          class="-mx-3 flex flex-col rounded-md px-3 no-underline hover:bg-[#e7e6e6] dark:hover:bg-gray-200 sm:py-3"
+          target="_blank"
+        >
+          <span>Connorlittleton.api</span>
+          <span class="text-[#63637D]">A custom JSON placeholder like API.</span
+          >
+        </a>
+      </div>
+    </div>
+    <div class="mt-16 sm:mt-32">
+      <span class="mb-5 block font-medium sm:mb-6">More</span>
+      <span class="text-[#82827c]"
+        >Want to read more? Checkout the
+        <a class="underline" href="/blog">blog</a>{" "} or the {" "}
+        <a class="underline" href="/blog">books</a>{" "}
+        i've written about.</span
+      >
     </div>
   </main>
 </Layout>
