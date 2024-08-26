@@ -1,6 +1,12 @@
 import { defineCollection, z } from "astro:content";
 
-const blogTags = ["Css", "Typescript", "Web", "Monorepo"] as const;
+const blogTags = [
+  "Css",
+  "Typescript",
+  "Web",
+  "Monorepo",
+  "Design System",
+] as const;
 
 const bookTags = [
   "Economics",

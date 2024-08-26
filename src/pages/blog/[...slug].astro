@@ -2,7 +2,7 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import BlockQuote from "../../components/mdx/BlockQuote.astro";
 import Anchor from "../../components/mdx/Anchor.astro";
-import Layout from "../../layouts/Layout.astro";
+import BlogLayout from "../../layouts/BlogLayout.astro";
 
 export const prerender = true;
 
@@ -28,7 +28,7 @@ const { Content } = await post.render();
 const components = { blockquote: BlockQuote, a: Anchor };
 ---
 
-<Layout title="Connor Littleton">
+<BlogLayout title="Connor Littleton">
   <main class="mx-auto w-full max-w-2xl px-4 py-14">
     <article class="flex flex-col">
       <div class="flex flex-col space-y-3">
@@ -46,4 +46,4 @@ const components = { blockquote: BlockQuote, a: Anchor };
       </div>
     </article>
   </main>
-</Layout>
+</BlogLayout>
