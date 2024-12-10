@@ -1,8 +1,17 @@
 ---
+interface Props {
+  root?: boolean;
+}
 
+const { root } = Astro.props;
+console.log("root", root);
 ---
 
-<header class="mb-32 flex flex-col items-start">
-  <a class="text-medium no-underline inline-block font-medium" href="/">Connor Littleton</a>
-  <span class="text-medium font-medium leading-none text-[#63635e]">Software Engineer</span>
+<header class:list={["flex flex-col items-start", { "mb-32": root }]}>
+  <a class="text-medium no-underline inline-block font-medium" href="/"
+    >Connor Littleton</a
+  >
+  <span class="text-medium font-medium leading-none text-[#63635e]"
+    >Software Engineer</span
+  >
 </header>
