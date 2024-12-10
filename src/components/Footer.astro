@@ -1,16 +1,16 @@
 ---
 const navLinks = [
   {
+    label: "Blog",
+    url: "/blog",
+  },
+  {
     label: "Github",
     url: "https://github.com/Littletonconnor",
   },
   {
     label: "LinkedIn",
     url: "https://www.linkedin.com/in/connor-littleton-31bb43135/",
-  },
-  {
-    label: "Email",
-    url: "mailto:'littletonconnor@gmail.com'",
   },
   {
     label: "Resume",
@@ -37,7 +37,7 @@ const today = new Date().getFullYear();
         navLinks.map((link) => (
           <li>
             <a
-              class="text-slate-600 decoration-blue-500 font-medium hover:underline underline-offset-2"
+              class="text-slate-600 decoration-slate-500 font-medium hover:underline underline-offset-2"
               href={link.url}
             >
               {link.label}

@@ -14,15 +14,13 @@ The content hash is built using a script that crawls our public directory. It's 
 
 Here's what the content hash looks like:
 
-<Code
-  lang="js"
-  theme="github-dark"
-  code={`const assets_manifest = {
+```js
+  const assets_manifest = {
   '/next/person.png': '/next/person.123.png,
   '/next/person1.png': '/next/person.456.png,
   '/next/person2.png': '/next/person3.789.png'
-  }`}
-/>
+  }
+```
 
 It dawned on me that we could use this content hash to find out which assets were being used in our code. I wrote a script that extends the script we already have to generate the content hash that would crawl our codebase and find all the instances of the content hash. Then, I would compare that to the content hash object and find out which assets were being used.
 
