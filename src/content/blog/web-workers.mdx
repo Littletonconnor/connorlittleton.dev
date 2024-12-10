@@ -1,0 +1,74 @@
+---
+title: Web Workers
+description: My Motivation to Learn Web Workers
+pubDate: "2024-12-10"
+---
+
+Not too long long ago at work, we ran into a tricky performance issue. Our site was loading dozens of third-party tracking pixels—tiny bits of code that report user interactions or page views. Normally, these pixels run quietly in the background without affecting the main user experience. But one day, some of these pixels started to fail to load properly.
+
+Even though these scripts were loaded asynchronously, the browser's loading spinner kept spinning indefinitely, which as you can probably imagine, was confusing to our customers. To make matters worse, our monitoring tools—like Pingdom—saw this stalled loading state as a sign the site was down. This triggered late—night pages to multiple teams, even though the actual site content was just fine.
+
+This experience led me to ask: Why should unrelated scripts—especially those we don't control—block our main thread and impact the user experience? We needed a way to move this work off to the side, allowing our core page to stay smooth and responsive. That's what led me to **Web Workers**.
+
+## Why Javascript's Single-Threaded Nature Matters
+
+To understand why our site got stuck, it helps to know how Javascript typically works. By default, Javascript is single-threaded. That means there's essentially one main "path" of execution. If a piece of code slows down or hangs, everything else waits behind it—just like a grocery store line with only one cashier. If the person at the front has a complicated return, everyone else is stuck until it's resolved.
+
+As modern web pages load dozens of libraries, analytics tags, and other scripts, the main thread can quickly become overloaded. Any heavy computations or a resource that never finishes loading can block the queue, causing delays, poor responsiveness, and a degraded user experience.
+
+## What is a Thread, Anyway?
+
+Think of a "thread" as a single file of workers at a factory assembly line. Each worker handles one task at a time. With only one line of workers, any delay holds up the entire process. But if you add more lines (more threads), you can delegate tasks and prevent one slow job from delaying everything else.
+
+## Enter Web Workers: Moving Work Off the Main Thread
+
+Modern browsers give you the power to spin up additional threads separate from the main one. These are known as **Web Workers**. You can think of them as hiring extra helpers to handle time-consuming tasks behind the scenes. If a web worker gets bogged down, the main application thread is still free to respond quickly, keeping the page smooth and interactive
+
+## What are Web Workers Good for
+
+Web workers are ideal for handling heavy or intensive computation, such as:
+
+- Processing large datasets.
+- Running complex algorithms (e.g., image processing, audio manipulation, or machine learning tasks)
+- handling encryption, compression, and other CPU-intensive operations
+
+By moving these tasks off the main thread, your page stays responsive. While the worker crunches numbers or processes images, the main thread can keep updating the UI, handling user input, and ensuring a fluid user experience.
+
+## The Solution: Applying Web Workers at Work
+
+Once I learned the basics of Web Workers, it was clear they could help solve our pixel problem. By moving the pixel loading logic into a worker, we stopped these scripts from blocking the main thread. Even if they failed to load properly, our page continued to function smoothly, and automated health checks no longer flagged false alarms. It was a win-win solution, improving both performance and peace of mind.
+
+## A Quick Example
+
+To wrap things up, let's look at a brief example. Suppose we need to process a huge array of data. Doing this on the main thread might cause noticeable lag. With a Web Worker, we can offload the computation.
+
+```js
+// main.js
+
+if (window.Worker) {
+  const worker = new Worker("worker.js");
+  worker.postMessage(largeDataArray);
+
+  worker.onmessage = (e) => {
+    const processData = event.data;
+    console.log("[Main Thread]: Received processed data ", processedData);
+  };
+} else {
+  console.log("[Main Thread]: Web Workers not supported.");
+}
+
+// worker.js
+
+this.addEventListener("message", (e) => {
+  console.log("[WORKER THREAD]: Message Received");
+  const result = expensiveOperation(data);
+  postMessage(result);
+});
+```
+
+## Resources
+
+- [Using Web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers)
+- [Web Workers API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API)
+- [Threads](https://developer.mozilla.org/en-US/docs/Glossary/Thread)
+- [Critical Rendering Path](https://web.dev/articles/critical-rendering-path)
