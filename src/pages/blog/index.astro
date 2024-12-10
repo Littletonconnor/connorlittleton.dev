@@ -17,7 +17,7 @@ const posts = await getCollection("blog");
             <li>
               <article>
                 <a
-                  href="/blog/design-systems"
+                  href={`/blog/${post.data.title.toLowerCase().split(" ").join("-")}`}
                   class="-mx-3 flex flex-col rounded-md px-3 no-underline hover:bg-[#e7e6e6] dark:hover:bg-gray-200 sm:py-3"
                 >
                   <h2>{post.data.title}</h2>

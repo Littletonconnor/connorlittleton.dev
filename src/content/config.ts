@@ -22,7 +22,6 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    tag: z.enum(blogTags),
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     heroImage: z.string().optional(),
@@ -39,16 +38,5 @@ const tips = defineCollection({
   }),
 });
 
-const books = defineCollection({
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    tag: z.enum(bookTags),
-    pubDate: z.coerce.date(),
-    updatedDate: z.coerce.date().optional(),
-    heroImage: z.string().optional(),
-  }),
-});
-
-export const collections = { blog, books, tips };
+export const collections = { blog, tips };
 export { blogTags, bookTags };
