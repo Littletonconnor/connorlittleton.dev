@@ -1,6 +1,6 @@
 @font-face {
   font-family: "CommitMono";
-  src: url("/assets/fonts/CommitMono-400-italic.oft") format("opentype");
+  src: url("/fonts/CommitMono-400-italic.oft") format("opentype");
   font-weight: 400;
   font-style: italic;
   font-display: swap;
@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: "CommitMono";
-  src: url("/assets/fonts/CommitMono-400-Regular.otf") format("opentype");
+  src: url("/fonts/CommitMono-400-Regular.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -16,7 +16,7 @@
 
 @font-face {
   font-family: "CommitMono";
-  src: url("/assets/fonts/CommitMonore-700-italic.otf") format("opentype");
+  src: url("/fonts/CommitMonore-700-italic.otf") format("opentype");
   font-weight: 700;
   font-style: italic;
   font-display: swap;
@@ -24,7 +24,7 @@
 
 @font-face {
   font-family: "CommitMono";
-  src: url("/assets/fonts/CommitMono-700-Regular.otf") format("opentype");
+  src: url("/fonts/CommitMono-700-Regular.otf") format("opentype");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -33,7 +33,7 @@
 /* Geist fonts */
 @font-face {
   font-family: "Geist";
-  src: url("/assets/fonts/Geist-Black.woff2") format("woff2");
+  src: url("/fonts/Geist-Black.woff2") format("woff2");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -41,7 +41,7 @@
 
 @font-face {
   font-family: "Geist";
-  src: url("/assets/fonts/Geist-Bold.woff2") format("woff2");
+  src: url("/fonts/Geist-Bold.woff2") format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -49,7 +49,7 @@
 
 @font-face {
   font-family: "Geist";
-  src: url("/assets/fonts/Geist-Light.woff2") format("woff2");
+  src: url("/fonts/Geist-Light.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -57,7 +57,7 @@
 
 @font-face {
   font-family: "Geist";
-  src: url("/assets/fonts/Geist-Medium.woff2") format("woff2");
+  src: url("/fonts/Geist-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -65,7 +65,7 @@
 
 @font-face {
   font-family: "Geist";
-  src: url("/assets/fonts/Geist-Regular.woff2") format("woff2");
+  src: url("/fonts/Geist-Regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -73,7 +73,7 @@
 
 @font-face {
   font-family: "Geist";
-  src: url("/assets/fonts/Geist-SemiBold.woff2") format("woff2");
+  src: url("/fonts/Geist-SemiBold.woff2") format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -81,7 +81,7 @@
 
 @font-face {
   font-family: "Geist";
-  src: url("/assets/fonts/Geist-Thin.woff2") format("woff2");
+  src: url("/fonts/Geist-Thin.woff2") format("woff2");
   font-weight: 200;
   font-style: normal;
   font-display: swap;
@@ -89,7 +89,7 @@
 
 @font-face {
   font-family: "Geist";
-  src: url("/assets/fonts/Geist-UltraBlack.woff2") format("woff2");
+  src: url("/fonts/Geist-UltraBlack.woff2") format("woff2");
   font-weight: 950;
   font-style: normal;
   font-display: swap;
@@ -97,7 +97,7 @@
 
 @font-face {
   font-family: "Geist";
-  src: url("/assets/fonts/Geist-UltraLight.woff2") format("woff2");
+  src: url("/fonts/Geist-UltraLight.woff2") format("woff2");
   font-weight: 100;
   font-style: normal;
   font-display: swap;
@@ -105,7 +105,7 @@
 
 @font-face {
   font-family: "Geist";
-  src: url("/assets/fonts/GeistVariableVF.woff2") format("woff2");
+  src: url("/fonts/GeistVariableVF.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -121,15 +121,18 @@ body {
   font-feature-settings: normal;
   font-variation-settings: normal;
 }
+
 hr {
   height: 0;
   color: inherit;
   border-top-width: 1px;
 }
+
 abbr:where([title]) {
   -webkit-text-decoration: underline dotted;
   text-decoration: underline dotted;
 }
+
 h1,
 h2,
 h3,
@@ -139,14 +142,17 @@ h6 {
   font-size: inherit;
   font-weight: inherit;
 }
+
 a {
   color: inherit;
   text-decoration: inherit;
 }
+
 b,
 strong {
   font-weight: bolder;
 }
+
 code,
 kbd,
 pre,
@@ -163,9 +169,11 @@ samp {
     monospace;
   font-size: 1em;
 }
+
 small {
   font-size: 80%;
 }
+
 sub,
 sup {
   font-size: 75%;
@@ -173,17 +181,21 @@ sup {
   position: relative;
   vertical-align: initial;
 }
+
 sub {
   bottom: -0.25em;
 }
+
 sup {
   top: -0.5em;
 }
+
 table {
   text-indent: 0;
   border-color: inherit;
   border-collapse: collapse;
 }
+
 button,
 input,
 optgroup,
@@ -199,10 +211,12 @@ textarea {
   margin: 0;
   padding: 0;
 }
+
 button,
 select {
   text-transform: none;
 }
+
 [type="button"],
 [type="reset"],
 [type="submit"],
@@ -211,33 +225,42 @@ button {
   background-color: initial;
   background-image: none;
 }
+
 :-moz-focusring {
   outline: auto;
 }
+
 :-moz-ui-invalid {
   box-shadow: none;
 }
+
 progress {
   vertical-align: initial;
 }
+
 ::-webkit-inner-spin-button,
 ::-webkit-outer-spin-button {
   height: auto;
 }
+
 [type="search"] {
   -webkit-appearance: textfield;
   outline-offset: -2px;
 }
+
 ::-webkit-search-decoration {
   -webkit-appearance: none;
 }
+
 ::-webkit-file-upload-button {
   -webkit-appearance: button;
   font: inherit;
 }
+
 summary {
   display: list-item;
 }
+
 blockquote,
 dd,
 dl,
@@ -253,13 +276,16 @@ p,
 pre {
   margin: 0;
 }
+
 fieldset {
   margin: 0;
 }
+
 fieldset,
 legend {
   padding: 0;
 }
+
 menu,
 ol,
 ul {
@@ -267,24 +293,30 @@ ul {
   margin: 0;
   padding: 0;
 }
+
 dialog {
   padding: 0;
 }
+
 textarea {
   resize: vertical;
 }
+
 input::placeholder,
 textarea::placeholder {
   opacity: 1;
   color: #9ca3af;
 }
+
 [role="button"],
 button {
   cursor: pointer;
 }
+
 :disabled {
   cursor: default;
 }
+
 audio,
 canvas,
 embed,
@@ -296,11 +328,13 @@ video {
   display: block;
   vertical-align: middle;
 }
+
 img,
 video {
   max-width: 100%;
   height: auto;
 }
+
 [hidden] {
   display: none;
 }

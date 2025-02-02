@@ -1,14 +1,17 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { projects } from "../lib/utils";
 ---
 
 <Layout root={true} title="Connor Littleton">
   <main class="">
     <span class="mb-5 block font-semibold sm:mb-6">Today</span>
     <p class="text-[#63635e]">
-      Today I currently work as the design system engineering lead and on-call
-      lead at Wealthfront. I enjoy working on design systems and thinking deeply
-      about how to scale effective teams.
+      Hi, I'm Connor. I'm a Web Engineer on Wealthfront’s Investing Products
+      team and lead the on-call team for our Web team. I've worked across
+      several teams at the company, including serving as the engineering lead
+      for the Design System team and our growth team. I'm passionate about
+      learning new things and always eager to take on new challenges.
     </p>
     <div class="-mb-3 mt-16 sm:mt-32">
       <span class="mb-5 block font-semibold sm:mb-4">Blog</span>
@@ -27,7 +30,9 @@ import Layout from "../layouts/Layout.astro";
           class="-mx-3 flex flex-col rounded-md px-3 no-underline hover:bg-[#e7e6e6] dark:hover:bg-gray-200 sm:py-3"
         >
           <span>Personal Framework</span>
-          <span class="text-[#63637D]">My personal framework to ensure a strong work / life balance.</span>
+          <span class="text-[#63637D]"
+            >My personal framework to ensure a strong work / life balance.</span
+          >
         </a>
         <a
           href="/blog"
@@ -39,35 +44,30 @@ import Layout from "../layouts/Layout.astro";
     </div>
     <div class="-mb-3 mt-16 sm:mt-32">
       <span class="mb-5 block font-semibold sm:mb-4">Projects</span>
-      <div class="flex flex-col gap-7 sm:gap-4">
+      <ul class="flex flex-col gap-7 sm:gap-4">
+        {
+          projects.map((project) => (
+            <li>
+              <article>
+                <a
+                  href={project.href}
+                  target="_blank"
+                  class="-mx-3 flex flex-col rounded-md px-3 no-underline hover:bg-[#e7e6e6] dark:hover:bg-gray-200 sm:py-3"
+                >
+                  <span>{project.name}</span>
+                  <span class="text-[#63637D]">{project.description}</span>
+                </a>
+              </article>
+            </li>
+          ))
+        }
         <a
-          href="https://github.com/Littletonconnor/cwl-ui"
-          target="_blank"
-          class="-mx-3 flex flex-col rounded-md px-3 no-underline hover:bg-[#e7e6e6] dark:hover:bg-gray-200 sm:py-3"
+          href="/projects"
+          class="-mx-3 flex flex-col rounded-md px-3 no-underline w-fit hover:underline sm:py-3"
         >
-          <span>Cwl UI</span>
-          <span class="text-[#63637D]">My personal design system library.</span>
+          <span>See all</span>
         </a>
-        <a
-          href="https://github.com/Littletonconnor/cwl-monorepo"
-          class="-mx-3 flex flex-col rounded-md px-3 no-underline hover:bg-[#e7e6e6] dark:hover:bg-gray-200 sm:py-3"
-          target="_blank"
-        >
-          <span>Cwl Monorepo</span>
-          <span class="text-[#63637D]"
-            >A practical monorepo for modern development.</span
-          >
-        </a>
-        <a
-          href="https://github.com/Littletonconnor/connorlittleton.api"
-          class="-mx-3 flex flex-col rounded-md px-3 no-underline hover:bg-[#e7e6e6] dark:hover:bg-gray-200 sm:py-3"
-          target="_blank"
-        >
-          <span>Connorlittleton.api</span>
-          <span class="text-[#63637D]">A custom JSON placeholder like API.</span
-          >
-        </a>
-      </div>
+      </ul>
     </div>
   </main>
 </Layout>

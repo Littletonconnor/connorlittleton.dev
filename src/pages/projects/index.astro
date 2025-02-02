@@ -1,27 +1,27 @@
 ---
 import { getCollection } from "astro:content";
 import BlogLayout from "../../layouts/BlogLayout.astro";
-
-const posts = await getCollection("blog");
+import { projects } from "../../lib/utils";
 ---
 
-<BlogLayout root={false} title="Connor Littleton | Blog Posts">
+<BlogLayout title="Connor Littleton | Blog Posts">
   <main class="mx-auto w-full max-w-2xl px-4 md:px-0 py-14 min-h-svh">
     <div class="space-y-4">
       <div class="space-y-1 mb-8">
-        <h1 class="text-3xl font-bold">Blog</h1>
+        <h1 class="text-3xl font-bold">Projects</h1>
       </div>
       <ul class="space-y-2">
         {
-          posts.map((post) => (
+          projects.map((project) => (
             <li>
               <article>
                 <a
-                  href={`/blog/${post.data.title.toLowerCase().split(" ").join("-")}`}
+                  href={project.href}
                   class="-mx-3 flex flex-col rounded-md px-3 no-underline hover:bg-[#e7e6e6] dark:hover:bg-gray-200 sm:py-3"
+                  target="_blank"
                 >
-                  <h2>{post.data.title}</h2>
-                  <span class="text-[#63637D]">{post.data.description}</span>
+                  <span>{project.name}</span>
+                  <span class="text-[#63637D]">{project.description}</span>
                 </a>
               </article>
             </li>
