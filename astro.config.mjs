@@ -1,5 +1,5 @@
 import mdx from "@astrojs/mdx";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import vercel from "@astrojs/vercel";
 import remarkToc from "remark-toc";
@@ -8,7 +8,10 @@ import { rehypeAccessibleEmojis } from "rehype-accessible-emojis";
 // https://astro.build/config
 export default defineConfig({
   output: "server",
-  integrations: [tailwind(), mdx()],
+  integrations: [mdx()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
   markdown: {
     remarkPlugins: [remarkToc],
     rehypePlugins: [rehypeAccessibleEmojis],

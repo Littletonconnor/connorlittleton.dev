@@ -6,7 +6,7 @@ export const projects = [
   },
   {
     name: "CWL UI",
-    description: "Myy personal design system library.",
+    description: "My personal design system library.",
     href: "https://github.com/Littletonconnor/cwl-ui",
   },
   {

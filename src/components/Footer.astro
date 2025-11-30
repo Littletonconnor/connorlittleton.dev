@@ -1,40 +1,35 @@
 ---
-const navLinks = [
+const socialLinks = [
   {
-    label: "Github",
-    url: "https://github.com/Littletonconnor",
+    label: "GitHub",
+    href: "https://github.com/Littletonconnor",
   },
   {
     label: "LinkedIn",
-    url: "https://www.linkedin.com/in/connor-littleton-31bb43135/",
-  },
-  {
-    label: "Resume",
-    url: "/resume.pdf",
+    href: "https://www.linkedin.com/in/connor-littleton-31bb43135/",
   },
 ];
 
-const today = new Date().getFullYear();
+const year = new Date().getFullYear();
 ---
 
-<footer class="w-full border-t border-slate-300">
+<footer class="w-full border-t" style="border-color: var(--color-border);">
   <div
-    class="mx-auto flex max-w-2xl flex-col items-baseline justify-between space-y-2 px-3 py-4 md:flex-row"
+    class="max-w-2xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4"
   >
-    <span class="flex space-x-1"
-      ><span
-        >©
-        {today}
-        {" "}Connor Littleton
-      </span>
-    </span>
-    <ul class="flex gap-4">
+    <p class="text-sm" style="color: var(--color-muted);">
+      &copy; {year} Connor Littleton
+    </p>
+    <ul class="flex items-center gap-5">
       {
-        navLinks.map((link) => (
+        socialLinks.map((link) => (
           <li>
             <a
-              class="text-slate-600 decoration-slate-700 font-medium hover:underline underline-offset-2"
-              href={link.url}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm transition-opacity hover:opacity-70"
+              style="color: var(--color-muted);"
             >
               {link.label}
             </a>
