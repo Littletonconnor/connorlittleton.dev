@@ -1,36 +1,43 @@
 ---
-import "@fontsource-variable/inter";
-
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-
 import "../styles/global.css";
 
 export interface Props {
   title: string;
-  root: boolean;
+  description?: string;
 }
 
-const { title, root } = Astro.props;
+const { title, description = "Connor Littleton - Software Engineer" } =
+  Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Connor Littletons personal website" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
     <title>{title}</title>
   </head>
-  <body class="bg-gray-100 antialiased">
-    <div
-      class="mx-auto my-12 max-w-[692px] px-6 text-gray-1200 antialiased sm:my-32 md:my-16"
-    >
-      <Header root={root} />
+  <body class="min-h-screen flex flex-col">
+    <Header />
+    <main class="flex-1 w-full max-w-2xl mx-auto px-6 py-16 md:py-24">
       <slot />
-    </div>
+    </main>
     <Footer />
   </body>
 </html>

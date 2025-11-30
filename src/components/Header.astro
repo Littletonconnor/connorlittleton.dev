@@ -1,17 +1,41 @@
 ---
-interface Props {
-  root?: boolean;
-}
+const navLinks = [
+  { label: "Writing", href: "/blog" },
+  { label: "Projects", href: "/projects" },
+];
 
-const { root } = Astro.props;
-console.log("root", root);
+const currentPath = Astro.url.pathname;
 ---
 
-<header class:list={["flex flex-col items-start", { "mb-32": root }]}>
-  <a class="text-medium no-underline inline-block font-medium" href="/"
-    >Connor Littleton</a
-  >
-  <span class="text-medium font-medium leading-none text-[#63635e]"
-    >Software Engineer</span
-  >
+<header
+  class="sticky top-0 z-50 w-full border-b backdrop-blur-sm"
+  style="border-color: var(--color-border); background-color: color-mix(in srgb, var(--color-background) 80%, transparent);"
+>
+  <nav class="max-w-2xl mx-auto px-6 h-14 flex items-center justify-between">
+    <a
+      href="/"
+      class="font-medium text-sm tracking-tight transition-opacity hover:opacity-70"
+    >
+      Connor Littleton
+    </a>
+    <ul class="flex items-center gap-6">
+      {
+        navLinks.map((link) => (
+          <li>
+            <a
+              href={link.href}
+              class:list={[
+                "text-sm transition-opacity hover:opacity-70",
+                currentPath.startsWith(link.href)
+                  ? "font-medium"
+                  : "opacity-60",
+              ]}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
 </header>

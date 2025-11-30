@@ -1,73 +1,114 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import { projects } from "../lib/utils";
+
+const posts = await getCollection("blog");
+const recentPosts = posts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const featuredProjects = projects.slice(0, 3);
 ---
 
-<Layout root={true} title="Connor Littleton">
-  <main class="">
-    <span class="mb-5 block font-semibold sm:mb-6">Today</span>
-    <p class="text-[#63635e]">
-      Hi, I'm Connor. I'm a Web Engineer on Wealthfront’s Investing Products
-      team and lead the on-call team for our Web team. I've worked across
-      several teams at the company, including serving as the engineering lead
-      for the Design System team and our growth team. I'm passionate about
-      learning new things and always eager to take on new challenges.
-    </p>
-    <div class="-mb-3 mt-16 sm:mt-32">
-      <span class="mb-5 block font-semibold sm:mb-4">Blog</span>
-      <div class="flex flex-col gap-7 sm:gap-4">
-        <a
-          href="/blog/monorepos"
-          class="-mx-3 flex flex-col rounded-md px-3 no-underline hover:bg-[#e7e6e6] dark:hover:bg-gray-200 sm:py-3"
-        >
-          <span>Navigating the Monorepo tooling landscape</span>
-          <span class="text-[#63637D]"
-            >A practical guide to migrating to modern monorepo tooling.</span
-          >
-        </a>
-        <a
-          href="/blog/personal-framework"
-          class="-mx-3 flex flex-col rounded-md px-3 no-underline hover:bg-[#e7e6e6] dark:hover:bg-gray-200 sm:py-3"
-        >
-          <span>Personal Framework</span>
-          <span class="text-[#63637D]"
-            >My personal framework to ensure a strong work / life balance.</span
-          >
-        </a>
+<Layout title="Connor Littleton">
+  <div class="space-y-20">
+    <!-- Hero Section -->
+    <section class="opacity-0 animate-fade-in-up">
+      <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight mb-6">
+        Software Engineer
+      </h1>
+      <p class="text-lg leading-relaxed" style="color: var(--color-muted);">
+        Hi, I'm Connor. I'm a Web Engineer at <a
+          href="https://www.wealthfront.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="underline underline-offset-2 transition-opacity hover:opacity-70"
+          style="text-decoration-color: var(--color-border-hover);"
+          >Wealthfront</a
+        >, where I work on investing products and lead our web on-call team. I'm
+        passionate about building great user experiences and always eager to
+        tackle new challenges.
+      </p>
+    </section>
+
+    <!-- Writing Section -->
+    <section class="opacity-0 animate-fade-in-up delay-1">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-sm font-medium uppercase tracking-wider" style="color: var(--color-muted);">
+          Writing
+        </h2>
         <a
           href="/blog"
-          class="-mx-3 flex flex-col rounded-md px-3 no-underline w-fit hover:underline sm:py-3"
+          class="text-sm transition-opacity hover:opacity-70"
+          style="color: var(--color-muted);"
         >
-          <span>See all</span>
+          View all &rarr;
         </a>
       </div>
-    </div>
-    <div class="-mb-3 mt-16 sm:mt-32">
-      <span class="mb-5 block font-semibold sm:mb-4">Projects</span>
-      <ul class="flex flex-col gap-7 sm:gap-4">
+      <ul class="space-y-1">
         {
-          projects.map((project) => (
+          recentPosts.map((post) => (
             <li>
-              <article>
-                <a
-                  href={project.href}
-                  target="_blank"
-                  class="-mx-3 flex flex-col rounded-md px-3 no-underline hover:bg-[#e7e6e6] dark:hover:bg-gray-200 sm:py-3"
+              <a
+                href={`/blog/${post.slug}`}
+                class="group flex items-center justify-between py-3 -mx-3 px-3 rounded-lg transition-colors"
+                style="--hover-bg: var(--color-surface-hover);"
+                onmouseover="this.style.backgroundColor='var(--color-surface-hover)'"
+                onmouseout="this.style.backgroundColor='transparent'"
+              >
+                <span class="font-medium">{post.data.title}</span>
+                <span
+                  class="text-sm tabular-nums"
+                  style="color: var(--color-muted);"
                 >
-                  <span>{project.name}</span>
-                  <span class="text-[#63637D]">{project.description}</span>
-                </a>
-              </article>
+                  {new Date(post.data.pubDate).toLocaleDateString("en-US", {
+                    month: "short",
+                    year: "numeric",
+                  })}
+                </span>
+              </a>
             </li>
           ))
         }
+      </ul>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="opacity-0 animate-fade-in-up delay-2">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-sm font-medium uppercase tracking-wider" style="color: var(--color-muted);">
+          Projects
+        </h2>
         <a
           href="/projects"
-          class="-mx-3 flex flex-col rounded-md px-3 no-underline w-fit hover:underline sm:py-3"
+          class="text-sm transition-opacity hover:opacity-70"
+          style="color: var(--color-muted);"
         >
-          <span>See all</span>
+          View all &rarr;
         </a>
+      </div>
+      <ul class="space-y-1">
+        {
+          featuredProjects.map((project) => (
+            <li>
+              <a
+                href={project.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group flex flex-col sm:flex-row sm:items-center sm:justify-between py-3 -mx-3 px-3 rounded-lg transition-colors"
+                onmouseover="this.style.backgroundColor='var(--color-surface-hover)'"
+                onmouseout="this.style.backgroundColor='transparent'"
+              >
+                <span class="font-medium">{project.name}</span>
+                <span class="text-sm" style="color: var(--color-muted);">
+                  {project.description}
+                </span>
+              </a>
+            </li>
+          ))
+        }
       </ul>
-    </div>
-  </main>
+    </section>
+  </div>
 </Layout>
