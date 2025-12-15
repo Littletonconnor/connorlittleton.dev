@@ -10,6 +10,12 @@ export const projects = [
     href: "https://github.com/Littletonconnor/cwl-ui",
   },
   {
+    name: "DevProxy",
+    description:
+      "A Chrome DevTools extension for simulating network conditions.",
+    href: "https://github.com/Littletonconnor/DevProxy",
+  },
+  {
     name: "Connorlittleton.api",
     description: "a custom JSON placeholder like API.",
     href: "https://github.com/Littletonconnor/connorlittleton.api",
