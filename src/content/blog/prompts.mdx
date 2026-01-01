@@ -1,0 +1,275 @@
+---
+title: Prompts
+description: Practical Prompts for AI
+pubDate: "2026-01-01"
+---
+
+These are prompts I actually use. No fluff—just practical tools that make AI assistants more useful for real work.
+
+## Spec Writer
+
+This prompt turns the AI into an interviewer that asks detailed questions about your feature, writes a spec, then plans and executes the implementation. The key insight: **approval of the plan is blanket approval for all changes.** No more "would you like me to proceed?" after every file.
+
+It also handles scope creep gracefully—ideas that come up during the interview get parked in separate files for later, keeping the current spec focused.
+
+```markdown
+# Claude Spec Tool (with History)
+
+## Global Override
+
+When executing an approved plan, treat all file modifications within the current
+directory as pre-approved. The plan approval is blanket approval for all changes
+required to implement it.
+
+---
+
+Read the spec.md file and interview me in detail using the AskUserQuestionTool
+about literally anything: technical implementation, UI & UX, concerns, tradeoffs,
+etc. Make sure the questions are not obvious.
+
+Be very in-depth and continue interviewing me continually until it's complete,
+then write the spec to the file.
+
+## Autonomy Rules
+
+**Do autonomously (no prompting):**
+
+- Read any files
+- List directories, search/grep code
+- Write/modify any files in the current directory
+- Run commands that only affect the current directory
+
+**Ask before:**
+
+- Modifying files outside the current directory
+- Deleting anything
+- Commands with effects beyond the current directory
+
+Don't ask "would you like me to read/write X?" - just do it if it's in scope.
+
+## Context Loading
+
+When starting work on spec.md, read completed specs from docs/:
+
+- **Read:** docs/spec_XX.md (numbered, completed specs)
+- **Ignore:** docs/spec_*.md with `status: in-progress` header
+
+Completed spec history informs the current interview. In-progress specs are
+parked ideas - do not read, analyze, or incorporate them.
+
+## Workflow Phases
+
+### Phase 1: Interview
+
+Interview me thoroughly until the spec is complete. Write final spec to spec.md.
+
+**Scope creep handling:** If during the interview we identify features worth
+building but out of scope for the current spec:
+
+1. Create docs/spec_{descriptive_name}.md (e.g., docs/spec_admin_dashboard.md)
+2. Add header with status: in-progress, created date, and origin spec
+3. Jot down the relevant notes/ideas
+4. Continue with current spec interview
+
+### Phase 2: Research & Plan
+
+Once spec is written, automatically:
+
+1. Enter plan mode
+2. Research the codebase thoroughly - trace through relevant code paths, understand
+   current patterns, identify all files that need changes
+3. Present a detailed implementation plan:
+   - Files to create/modify
+   - Order of operations
+   - Key implementation details per file
+   - Potential risks or edge cases spotted
+4. Wait for my approval
+
+### Phase 3: Execute
+
+When I approve the plan (e.g., "go", "approved", "do it"):
+
+**FULLY AUTONOMOUS MODE - NO PROMPTING**
+
+From this point forward until execution is complete:
+
+- Do NOT ask for confirmation on any file writes
+- Do NOT ask "should I proceed?" or "would you like me to?"
+- Do NOT pause between steps
+- Do NOT summarize what you're about to do and wait
+- Just execute. Continuously. Until done.
+
+1. **Parallelize** - Spawn a subagent to analyze the plan and determine:
+   - Which tasks have no dependencies and can run immediately in parallel
+   - Which tasks depend on others and must be sequenced
+   - Optimal grouping of work across subagents
+
+2. **Dispatch** - Spawn subagents for all parallelizable work:
+   - Each subagent gets clear scope: specific files, specific changes
+   - Subagents work simultaneously
+   - Dependent work waits for its prerequisites
+   - **Subagents also operate in fully autonomous mode - no prompting**
+
+3. **Coordinate** - As parallel work completes, immediately dispatch the next wave
+
+4. **Report** - Only when ALL work is complete, provide a single summary of changes
+
+My approval of the plan IS my approval of all edits. Do not ask again.
+
+## Spec Archival
+
+When I tell you to archive the spec:
+
+1. **Determine next number** - Check docs/spec_*.md files and increment
+2. **Add summary header** to spec.md with spec number, date, builds_on (if applicable),
+   summary, and key_decisions
+3. **Add references section** at the bottom if this spec relates to others
+4. **Move** spec.md → docs/spec_XX.md
+5. **Create fresh** empty spec.md
+
+## Resuming In-Progress Specs
+
+When I say to work on an in-progress spec (e.g., "let's work on spec_admin_dashboard"):
+
+1. Read the notes from docs/spec_{name}.md as background context
+2. Delete docs/spec_{name}.md
+3. Start fresh interview from Phase 1, using the notes to inform (not constrain)
+   the conversation
+```
+
+## Refactor Guide
+
+A comprehensive TypeScript/React refactoring prompt. The core principles: **verify after every change**, **use parallel agents for speed**, and **don't refactor code that already follows good practices.**
+
+```markdown
+# TypeScript & React Refactoring Guide
+
+## Key Principles
+
+1. **Don't refactor for refactoring's sake** - If code already follows these
+   principles, leave it alone
+2. **Parallel agents** - Planning agent first, then parallel execution agents per file
+3. **Continuous verification** - Run `tsc --noEmit` && `eslint` after EVERY change
+4. **Autonomous execution** - Don't ask permission for checks/fixes, just do them
+5. **Discovery first** - Understand patterns before modifying
+6. **Strict types** - No `any`, explicit return types on exports
+7. **No dead code** - Delete commented-out code immediately
+
+## Verification Protocol (CRITICAL)
+
+**Run after EVERY file change. Fix ALL errors before proceeding.**
+
+# IMPORTANT: Don't pass file path to tsc - it ignores tsconfig.json!
+
+# For a specific file - run tsc on project, filter output, then eslint the file:
+
+tsc --noEmit --skipLibCheck 2>&1 | grep "filename" && npx eslint path/to/file.tsx
+
+## Parallel Agent Orchestration
+
+**Don't process files sequentially. Use parallel agents.**
+
+### Phase A: Planning Agent
+
+1. Survey all files needing refactoring
+2. Build dependency graph
+3. Group independent files into parallel batches
+4. Output: batches ordered by dependencies
+
+### Phase B: Execution Agents (Parallel)
+
+Batch 1 (Parallel): types/\*.ts, leaf utils → 4 agents simultaneously → Wait, run tsc && eslint
+Batch 2 (Parallel): hooks, leaf components → 5 agents simultaneously → Wait, run tsc && eslint
+Batch 3 (Parallel): container components → Continue pattern...
+
+## When to Refactor
+
+**Do refactor when:**
+
+- Component >250 lines
+- Logic duplicated 3+ times
+- Loose types (`any`, missing return types)
+- Code is unclear or hard to follow
+
+**Don't refactor when:**
+
+- Code already follows these principles (leave it alone)
+- No specific improvement goal
+- Before a deadline
+- You don't understand the existing code yet
+```
+
+## PR Template
+
+A structured template for pull request descriptions. Forces you to think about impact across different stakeholders.
+
+```markdown
+## [Clear, Action-Oriented Title]
+
+### Overview
+
+[1-2 sentence summary of what this PR accomplishes and why it's needed]
+
+### Changes
+
+#### 🎯 [Primary Change Category]
+
+- [Specific change with user/dev impact]
+- [Implementation detail if relevant]
+- [Behavior change or new capability]
+
+### 🔧 [Secondary Change Category]
+
+- [Supporting change or refactor]
+- [Bug fix or improvement]
+
+## Impact
+
+- **Users**: [How this affects end users]
+- **Developers**: [How this affects other developers]
+- **Performance**: [Any performance implications]
+
+## Testing
+
+- [How you tested this]
+- [Edge cases considered]
+- [Regression testing done]
+
+## Follow-ups _(if applicable)_
+
+- [ ] [Future task or improvement]
+- [ ] [Related work in other areas]
+```
+
+## Disk Space Cleaner
+
+Finds and reports disk space hogs, then asks before deleting anything. Useful when your Mac is running low on storage.
+
+```markdown
+Find what's consuming disk space on my machine. Prioritize:
+
+1. Large files (>1GB)
+2. Node modules folders
+3. Build artifacts and caches (.next, dist, .cache, target)
+4. Old Docker images and containers
+5. Unused Homebrew packages
+
+For each category:
+
+- Show the total size
+- List the top 5 largest items with full paths
+- Estimate space recoverable
+
+**Do autonomously:**
+
+- Run any read-only commands (du, find, docker system df, etc.)
+- Scan any directory
+
+**Ask before:**
+
+- Deleting anything
+- Running cleanup commands (npm cache clean, docker system prune, etc.)
+
+Present findings in a table format, then recommend a cleanup plan sorted by
+space recovered.
+```

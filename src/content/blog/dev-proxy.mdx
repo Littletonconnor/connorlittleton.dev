@@ -3,3 +3,56 @@ title: Building DevProxy
 description: How DevProxy is built
 pubDate: "2025-12-01"
 ---
+
+[DevProxy](https://github.com/Littletonconnor/DevProxy) is a Chrome DevTools extension I built for simulating network conditions during development. It lets you test error states, latency, and edge cases without touching your backend.
+
+## The Problem
+
+Testing error handling is tedious. You either:
+
+1. Modify backend code to return errors temporarily
+2. Set up mock servers
+3. Disconnect your network and hope for the best
+
+None of these are great for quick iteration.
+
+## The Solution
+
+DevProxy intercepts requests directly in the browser. Open DevTools, create a rule, and immediately see how your app handles:
+
+- **HTTP errors** — 401, 500, 503, etc.
+- **Latency** — simulate slow 3G or timeout conditions
+- **Header changes** — strip auth tokens, modify CORS headers
+- **Network failures** — complete connection drops
+
+All client-side. Your actual backend never sees these requests.
+
+## How It Works
+
+Chrome extensions run in isolated contexts, so the DevTools panel can't directly access page JavaScript. DevProxy uses a multi-layer architecture:
+
+```
+DevTools Panel (React UI)
+        ↓
+Background Service Worker (state management)
+        ↓
+Content Script (bridge)
+        ↓
+Injected Interceptor (monkey-patches fetch/XHR)
+```
+
+The injected script wraps `fetch` and `XMLHttpRequest` at the page level. When a request matches a rule, DevProxy intercepts it before it leaves the browser.
+
+## Why Not Use Chrome's Built-in APIs?
+
+Chrome's Manifest V3 removed `webRequestBlocking` for non-enterprise extensions. The replacement, `declarativeNetRequest`, can block or redirect requests but can't simulate status codes or add delays.
+
+Client-side interception was the only option that gave full control.
+
+## Tech Stack
+
+- React 19, Tailwind CSS 4, shadcn/ui
+- Vite 7, TypeScript 5
+- Chrome Extension Manifest V3
+
+Check it out: [github.com/Littletonconnor/DevProxy](https://github.com/Littletonconnor/DevProxy)
